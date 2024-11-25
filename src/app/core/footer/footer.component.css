@@ -1,0 +1,88 @@
+.footer_section {
+    background-color: #f5efe6; 
+    color: #4d4d4d;
+    padding: 30px 0;
+}
+
+.footer_section .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-logo h2 {
+    font-size: 24px;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+/* Стандартен размер на логото */
+#logo-img {
+    width: 120px;
+    height: auto;
+  }
+
+.footer-logo p {
+    color: #6e6e6e;
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-contact p {
+    line-height: 1.2; /* Регулира разстоянието между редовете в абзаца */
+    margin-bottom: 0px; /* Регулира разстоянието между абзаците */
+    padding: 0; /* Премахва вътрешния отстъп, ако има такъв */
+}
+
+.footer-contact, .footer-subscribe {
+    font-size: 14px;
+    text-align: left; /* Alighn left текста */
+}
+
+.footer-contact h6, .footer-subscribe h6 {
+    font-weight: normal;
+    text-align: left; /* Alighn left текста */
+    margin-bottom: 10px;  
+}
+
+.footer-contact p {
+    text-align: left; /* Alighn left текста */
+    margin: 5px 0;
+}
+
+.footer-subscribe form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-subscribe input {
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    width: 180px;
+}
+
+.footer-subscribe button {
+    background-color: #84cc10;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.footer-subscribe button:hover {
+    background-color: #56ad05;
+}
+footer {
+    background-color: #f8f8f8; /* Цветът на фона на футъра */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -1px 5px rgba(0, 82, 21, 0.1); /* Лека сянка за по-видим футър */
+    margin-top: auto; /* Избутва футъра в долната част */
+    width: 100%;
+  }
+  

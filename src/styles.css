@@ -1,0 +1,24 @@
+/* You can add global styles to this file, and also import other style files */
+/* Главен контейнер */
+body, html {
+    margin: 0;
+    padding: 0;
+    min-height: 100%; /* Минималната височина на страницата е цялата височина на прозореца */
+    display: flex;
+    flex-direction: column; /* Позволява на съдържанието и футъра да са в една колона */
+  }
+  
+  /* Основно съдържание */
+  main {
+    flex: 1; /* Занимава цялото налично пространство над футъра */
+    background-color: #f3eeee; /* Примерен фон */
+  }
+  
+  /* Футър */
+  footer {
+    background-color: #f8f8f8; /* Цветът на фона на футъра */
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1); /* Лека сянка за по-видим футър */
+  }
+  

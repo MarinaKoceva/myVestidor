@@ -1,0 +1,63 @@
+/* Основни стилове за секцията */
+.hero_section {
+    height: 100vh; /* 100% от височината на екрана */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3eeee;
+    padding: 20px;
+    box-sizing: border-box; /* За да се включва padding-а във височината */
+}
+
+/* Контейнер за съдържанието */
+.hero_container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; /* Центрира съдържанието */
+    width: 100%;
+    max-width: 1200px;
+    gap: 30px; /* Разстояние между текстовата част и изображението */
+}
+
+/* Текстова част */
+.detail-box {
+    max-width: 45%; /* Ограничава ширината за по-добро изравняване */
+    color: #333;
+    line-height: 1.6; /* Подобрява четимостта */
+    text-align: center; /* Центрира текста */
+}
+
+/* Изображение */
+.img-box {
+    max-width: 50%; /* Поддържа балансиран вид */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -60px; /* Премества изображението нагоре */
+}
+
+.img-box img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px; /* Добавя леко заобляне за по-мек вид */
+}
+
+/* Стил за бутона */
+.catalog-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #84cc10;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px; /* Разстояние над бутона */
+}
+
+.catalog-btn:hover {
+    background-color: #56ad05;
+}
