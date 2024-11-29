@@ -1,89 +1,79 @@
-/* Настройка за навигационната лента */
-.header_section .navbar {
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Центрира бутоните */
-  }
+header {
+  background: #e4d4bb;
+  padding: 2px;
+}
+
+header ul {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75%;
+  margin: auto;
+}
+
+header ul span {
+  color: white;
+  padding: 0.5em;
+}
+
+header li {
+  list-style: none;
+  margin: 0.35em;
+  padding: 0 0.95em;
+  background-color: flex;
+  width: 15vw;
+  text-align: center;
+  border-radius: 20px;
   
-  /* Стилове за логото */
-  .navbar-brand {
-    margin-right: auto; /* Избутва логото вляво */
-  }
-  
-  /* Стилове за логото с ръчичка */
-  #logo {
-    margin-left: 0; /* Премахва всякакви излишни отстояния */
-    margin-right: auto; /* Избутва елементите вдясно */
-    padding-left: 40px; /* Малък отстъп от самия край */
-    display: flex;
-    align-items: center; /* Вертикално центриране */
-  }
-  
-  
-  .navbar-logo {
-    width: 10px !important;
-    height: auto !important;
-  }
-  
-  /* Стандартен размер на логото */
-  #logo-img {
-    width: 60px;
-    height: auto;
-  }
-  
-  /* Средни екрани (таблети) */
-  @media (max-width: 768px) {
-    #logo-img {
-        width: 90px;
-    }
-  }
-  
-  /* Малки екрани (мобилни устройства) */
-  @media (max-width: 576px) {
-    #logo-img {
-        width: 70px;
-    }
-  }
-  
-  /* Настройка за подравняване на навигационните бутони */
-  .navbar-nav {
-    display: flex;
-    justify-content: center; /* Центрира бутоните */
-    flex-grow: 1;
-  }
-  
-  /* Разстояние между навигационните бутони */
-  .navbar-nav .nav-item {
-    margin-right: 20px;
-  }
-  
-  .navbar a {
-    cursor: pointer; /* Бутоните са "кликаеми" */
-    text-decoration: none;
-    color: inherit;
-  }
-  
-  /* Базов стил за всички навигационни бутони */
-  .navbar-nav .nav-link {
-    color: #333;
-    padding: 8px 16px;
-    text-transform: uppercase;
-    font-weight: normal;
-    text-decoration: none;
-    transition: color 0.3s, background-color 0.3s;
-    border-radius: 4px; /* за закръглени ръбове */
-    cursor: pointer; /* добавя ръчичка при задържане */
-  }
-  
-  /* Стил за задържане с мишката (hover), за да оцвети в бяло */
-  .navbar-nav .nav-link:hover {
-    color: #333; /* цвят на текста */
-    background-color: #fff; /* цвят на фона */
-  }
-  
-  /* Стил за активния бутон */
-  .navbar-nav .nav-item.active .nav-link {
-    color: #fff; /* текстът за активния бутон остава бял */
-    background-color: #333; /* фонът на активния бутон */
-  }
-  
+}
+
+header li:hover {
+  scale: 1.1;
+}
+
+header a {
+  text-decoration: none;
+  color: rgb(54, 53, 53);
+  cursor: pointer;
+}
+
+.logo {
+  margin-left: 0; /* Премахва всякакви излишни отстояния */
+  margin-right: auto; /* Избутва елементите вдясно */
+  padding-left: 40px; /* Малък отстъп от самия край */
+  display: flex;
+  align-items: center; /* Вертикално центриране */
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5em 0;
+}
+
+.logo-wrap > img {
+  width: 80px !important;
+  height: auto !important;
+}
+/* Стандартен размер на логото */
+#logo-img {
+  width: 120px;
+  height: auto;
+}
+
+.footer-logo p {
+  color: #6e6e6e;
+  font-size: 14px;
+  margin: 0;
+}
+.mini-navbar-wrap {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin: auto;
+}
+
