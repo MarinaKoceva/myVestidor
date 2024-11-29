@@ -12,9 +12,9 @@
 /* Контейнер за съдържанието */
 .hero_container {
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center; /* Центрира съдържанието */
+  flex-direction: row; /* Запазва елементите един до друг (текст и изображение) */
+  align-items: center; /* Вертикално центрира съдържанието */
+  justify-content: center; /* Разделя текста и изображението с максимално пространство */
   width: 100%;
   max-width: 1200px;
   gap: 30px; /* Разстояние между текстовата част и изображението */
@@ -22,19 +22,20 @@
 
 /* Текстова част */
 .detail-box {
-  max-width: 45%; /* Ограничава ширината за по-добро изравняване */
+  max-width: 45%; /* Ограничаваме ширината на текста */
   color: #333;
   line-height: 1.6; /* Подобрява четимостта */
-  text-align: center; /* Центрира текста */
+  text-align: center; /* Подравняваме текста вляво */
 }
 
 /* Изображение */
 .img-box {
-  max-width: 50%; /* Поддържа балансиран вид */
+  max-width: 100%; /* Поддържa балансиран вид */
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: -60px; /* Премества изображението нагоре */
+  margin-right: 80px;
 }
 
 .img-box img {
@@ -44,7 +45,7 @@
   border-radius: 10px; /* Добавя леко заобляне за по-мек вид */
 }
 
-.login-btn{
+.login-btn {
   display: inline-block;
   padding: 12px 24px;
   background-color: #84cc10;
