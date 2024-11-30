@@ -45,6 +45,7 @@
   border-radius: 10px; /* Добавя леко заобляне за по-мек вид */
 }
 
+/* Стил за бутоните */
 .login-btn {
   display: inline-block;
   padding: 12px 24px;
@@ -58,7 +59,6 @@
   margin-top: 20px; /* Разстояние над бутона */
 }
 
-/* Стил за бутона */
 .catalog-btn {
   display: inline-block;
   padding: 12px 24px;
@@ -71,7 +71,9 @@
   cursor: pointer;
   margin-top: 40px; /* Разстояние над бутона */
 }
-
+.login-btn:hover {
+  background-color: #56ad05;
+}
 .catalog-btn:hover {
   background-color: #56ad05;
 }

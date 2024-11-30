@@ -8,6 +8,7 @@ import { AddThemeComponent } from './theme/add-theme/add-theme.component';
 import { MainComponent } from './main/main.component';
 import { CurrentThemeComponent } from './theme/current-theme/current-theme.component';
 import { AuthGuard } from './guards/auth.guard';
+import { HowItWorkComponent } from './how-it-work/how-it-work.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,6 +18,8 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'how-it-works', component: HowItWorkComponent},
+
   //   End - User routing
 
   // Start - Theme routing

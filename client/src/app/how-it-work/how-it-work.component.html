@@ -1,0 +1,64 @@
+<div class="section-steps">
+    <!-- Горна част с текст -->
+    <div class="banner">
+      <h1>Vestidor is your application for pre-owned products you will love!</h1>
+      <p>One community, thousands of brands, and a whole lot of second-hand uniqueness. Ready to get started? Here is how it works.</p>
+    </div>
+  
+    <!-- Първи ред със стъпки -->
+    <div class="steps-row">
+      <div class="step">
+        <img src="./listForFree.png" alt="List for free" />
+        <h3>1. Download and List</h3>
+        <p>Download the Vestidor app for free. Take pictures of your item, describe it and set your price. Tap "Upload" and your listing is live.</p>
+      </div>
+      <div class="step">
+        <img src="./sellIt.png" alt="Sell it, ship it" />
+        <h3>2. Sell it, ship it</h3>
+        <p>Sold! Box your item, print your prepaid shipping label, and pop to the drop-off point within 5 days.</p>
+      </div>
+      <div class="step">
+        <img src="./payday.png" alt="It's payday!" />
+        <h3>3. The payday has come!</h3>
+        <p>There are zero selling fees, so what you earn is yours to keep. You will be paid as soon as the buyer confirms everything is OK.</p>
+      </div>
+    </div>
+  
+    <!-- Бутон за стартиране на продажба 
+    <div class="button-container">
+        <a routerLink="/sell" class="sell-btn">Start selling</a>
+    </div>-->
+    <div class="center-container">
+
+        @if(isLoggedIn) {
+            <a routerLink="/sell" class="sell-btn">Start selling</a>
+        } @else {
+            <a routerLink="/login" class="login-btn">Login</a>
+        }
+    
+    </div>
+
+    <!-- Втори ред със стъпки за пазаруване -->
+    <div class="steps-row">
+      <div class="step">
+        <img src="findIt.png" alt="Find it" />
+        <h3>1. Find it</h3>
+        <p>Download the Vestidor app for free. Browse millions of unique items, search thousands of brands, and find your favorites.</p>
+      </div>
+      <div class="step">
+        <img src="./buyIt.png" alt="Buy it" />
+        <h3>2. Buy it</h3>
+        <p>Ask the seller any questions, then buy the item with the tap of a button. Pay securely via PayPal or bank card.</p>
+      </div>
+      <div class="step">
+        <img src="getIt.png" alt="Get it" />
+        <h3>3. Get it</h3>You will see your item's estimated delivery date at checkout and we will let you know when it is in the post and very soon you will get what you paid for.
+        <p></p>
+      </div>
+    </div>
+  
+    <!-- Бутон за стартиране на пазаруване -->
+    <div class="center-container">
+        <a routerLink="/catalog" class="catalog-btn">Catalog</a>
+    </div> 
+

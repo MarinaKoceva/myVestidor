@@ -59,8 +59,9 @@ header a {
 }
 /* Стандартен размер на логото */
 #logo-img {
-  width: 120px;
+  width: 80px;
   height: auto;
+  
 }
 
 .footer-logo p {

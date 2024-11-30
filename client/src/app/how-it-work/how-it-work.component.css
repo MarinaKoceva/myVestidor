@@ -1,0 +1,115 @@
+/* Стилизация за секцията */
+.section-steps {
+    font-family: Arial, sans-serif;
+    background-color: #f3eeee;
+    color: #333;
+    padding: 20px;
+  }
+  
+  /* Банер */
+  .banner {
+    background-color: auto;
+    text-align: center;
+    padding: 40px 20px;
+    color: #333;
+  }
+  
+  .banner h1 {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .banner p {
+    font-size: 1.2em;
+  }
+  
+  /* Стилове за редовете със стъпки */
+  .steps-row {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  
+  .step {
+    text-align: center;
+    max-width: 300px;
+    padding: 20px;
+  }
+  
+  .step img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .step h3 {
+    font-size: 1.5em;
+    margin: 15px 0 10px;
+    color: #333;
+  }
+  
+  .step p {
+    font-size: 1em;
+    color: #666;
+  }
+  
+  .center-container {
+    display: flex;
+    justify-content: center; /* Центрира по хоризонтала */
+    align-items: center; /* Центрира по вертикала */
+    flex-direction: column; /* Подрежда елементите вертикално */
+    height: 100%; /* Уверява се, че секцията заема достатъчно пространство */
+    margin: 20px 0; /* Отстояние от другите секции */
+}
+  /* Бутоните */
+  .login-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #84cc10;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px; /* Разстояние над бутона */
+    margin-bottom: 40px; /* Разстояние под бутона */
+  }
+  
+  .sell-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #84cc10;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px; /* Разстояние над бутона */
+    margin-bottom: 40px; /* Разстояние под бутона */
+  }
+  .catalog-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #84cc10;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 20px; /* Разстояние над бутона */
+    margin-bottom: 40px; /* Разстояние под бутона */
+  }
+  
+  .catalog-btn:hover {
+    background-color: #56ad05;
+  }
+  .login-btn:hover {
+    background-color: #56ad05;
+  }
+  .sell-btn:hover {
+    background-color: #56ad05;
+  }

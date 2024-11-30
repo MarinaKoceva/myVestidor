@@ -6,7 +6,7 @@
   padding: 20px;
   text-align: center;
   margin-top: auto; /* Избутва футъра в долната част */
-  width: auto;
+  width: 100%;
 }
 
 .footer_section .container {
@@ -18,7 +18,7 @@
 }
 
 .footer-logo h2 {
-  font-size: 24px;
+  font-size: 29px;
   font-weight: normal;
   margin-bottom: 5px;
 }
@@ -40,48 +40,37 @@
   padding: 0; /* Премахва вътрешния отстъп, ако има такъв */
 }
 
-.footer-contact, .footer-subscribe {
+.footer-contact, .footer-adres {
   font-size: 14px;
   text-align: left; /* Alighn left текста */
 }
 
-.footer-contact h6, .footer-subscribe h6 {
-  font-weight: normal;
-  text-align: left; /* Alighn left текста */
-  margin-bottom: 10px;  
+.footer-contact h6, .footer-adres h6 {
+  font-weight: bold; /* Makes the text bold */
+  font-size: 18px; /* Increases the font size */
+  text-align: left; /* Aligns the text to the left */
+  margin-bottom: 30px; /* Keeps consistent spacing */
 }
+
 
 .footer-contact p {
   text-align: left; /* Alighn left текста */
   margin: 5px 0;
 }
 
-.footer-subscribe form {
+.footer-adres form {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px 0;
 }
 
-.footer-subscribe input {
+.footer-adres input {
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 20px;
   width: 180px;
 }
 
-.footer-subscribe button {
-  background-color: #84cc10;
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 20px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.footer-subscribe button:hover {
-  background-color: #56ad05;
-}
 footer {
   background-color: #f8f8f8; /* Цветът на фона на футъра */
   padding: 20px;
