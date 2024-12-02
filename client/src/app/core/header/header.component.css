@@ -69,12 +69,5 @@ header a {
   font-size: 14px;
   margin: 0;
 }
-.mini-navbar-wrap {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 90%;
-  margin: auto;
-}
+
 

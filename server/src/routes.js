@@ -4,7 +4,7 @@ import itemControler from './controllers/itemController.js';
 
 const routes = Router();
 
-routes.use('/Please change here!!!', authController);
-routes.use('/Please change here!!!', itemControler);
+routes.use('/auth', authController);
+routes.use('/item', itemControler);
 
 export default routes;
