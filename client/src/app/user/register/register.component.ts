@@ -5,7 +5,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { emailValidator } from '../../utils/email.validator';
 import { DOMAINS } from '../../constants';
 import { matchPasswordsValidator } from '../../utils/match-passwords.validator';
@@ -25,7 +25,7 @@ export class RegisterComponent {
       Validators.minLength(5),
     ]),
     email: new FormControl('', [Validators.required, emailValidator(DOMAINS)]),
-    tel: new FormControl(''),
+    //tel: new FormControl(''),
     passGroup: new FormGroup(
       {
         password: new FormControl('', [
@@ -39,6 +39,8 @@ export class RegisterComponent {
       }
     ),
   });
+
+  constructor(private userService: UserService, private router: Router) {}
 
   isFieldTextMissing(controlName: string) {
     return (
@@ -70,7 +72,17 @@ export class RegisterComponent {
       console.error('Invalid Register Form!');
       return;
     }
-    
+    const {
+      username,
+      email,
+      passGroup: { password, rePassword } = {},
+    } = this.form.value;
 
-  }
+    this.userService
+      .register(username!, email!, password!, rePassword!)
+      .subscribe(() => {
+        this.router.navigate(['/themes']);
+      });
+  }  
+
 }

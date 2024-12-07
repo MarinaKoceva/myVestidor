@@ -1,87 +1,114 @@
 <div class="container">
-    <div class="sell-item-form">
-      <h2>Sell an item</h2>
-  
-      <form #form="ngForm" (ngSubmit)="addItem(form)">
-        <!-- Photo Upload Section -->
-        <div class="photo-upload">
-          <label for="photos">Add up to 20 photos. <a href="#">See photo tips.</a></label>
-          <div class="photo-upload-box">
-            <button type="button" class="upload-button">+ Upload photos</button>
-          </div>
+  <div class="sell-item-form">
+    <h2>Sell an item</h2>
+
+    <form #form="ngForm" (ngSubmit)="addItem(form)">
+      <!-- Photo Upload Section -->
+      <div class="photo-upload">
+        <label for="photos">Add up to 10 photos.</label>
+
+        <!--<input type="file" id="photos" name="photos" (change)="onFileSelected($event)" multiple accept="image/*"
+          hidden />-->
+        <input type="file" id="photos" (change)="onFileSelected($event)" multiple accept="image/*" hidden />
+        <button type="button" (click)="triggerFileInput()">Upload photos</button>
+
+        <div class="selected-photos" *ngIf="selectedFiles.length > 0">
+          <p *ngFor="let file of selectedFiles">{{ file.name }}</p>
         </div>
-  
-        <!-- Title Section -->
-        <div class="form-group">
-          <label for="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            ngModel
-            #inputTitle="ngModel"
-            required
-            placeholder="e.g. White COS Jumper"
-          />
-          <div *ngIf="inputTitle.touched && inputTitle.invalid">
-            <p *ngIf="inputTitle.errors?.required" class="error">Title is required.</p>
-          </div>
+      </div>
+
+      <!-- Preview Section -->
+      <div class="preview-images" *ngIf="previewImages.length > 0">
+        <div class="image-container" *ngFor="let preview of previewImages">
+          <img [src]="preview" alt="Preview" class="preview-image" />
         </div>
-  
-        <!-- Description Section -->
-        <div class="form-group">
-          <label for="description">Describe your item</label>
-          <textarea
-            name="description"
-            id="description"
-            rows="4"
-            ngModel
-            #inputDescription="ngModel"
-            required
-            placeholder="e.g. only worn a few times, true to size"
-          ></textarea>
-          <div *ngIf="inputDescription.touched && inputDescription.invalid">
-            <p *ngIf="inputDescription.errors?.required" class="error">Description is required.</p>
-          </div>
+      </div>
+
+      <!-- Title Section -->
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" name="itemName" id="itemName" ngModel #inputTitle="ngModel" required
+          placeholder="Enter item name" />
+        <div *ngIf="inputTitle.touched && inputTitle.invalid">
+          <p *ngIf="inputTitle.errors?.['required']" class="error">Title is required.</p>
         </div>
-  
-        <!-- Category Section -->
-        <div class="form-group">
-          <label for="category">Category</label>
-          <select name="category" id="category" ngModel required>
-            <option value="" disabled selected>Select a category</option>
-            <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
-          </select>
+      </div>
+
+      <!-- Description Section -->
+      <div class="form-group">
+        <label for="description">Describe your item</label>
+        <textarea name="description" id="description" rows="4" ngModel #inputDescription="ngModel" required
+          placeholder="e.g. only worn a few times, true to size"></textarea>
+        <div *ngIf="inputDescription.touched && inputDescription.invalid">
+          <p *ngIf="inputDescription.errors?.['required']" class="error">Description is required.</p>
         </div>
-  
-        <!-- Price Section -->
-        <div class="form-group">
-          <label for="price">Price</label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            ngModel
-            required
-            placeholder="€0.00"
-          />
-        </div>
-  
-        <!-- Feedback Section -->
-        <div class="form-group">
-          <label for="feedback">What do you think of our upload process?</label>
-          <input type="text" id="feedback" name="feedback" ngModel />
-        </div>
-  
-        <!-- Buttons -->
-        <div class="button-group">
-          <button type="button" class="btn draft">Save draft</button>
-          <button type="submit" class="btn upload" [disabled]="form.invalid">Upload</button>
-        </div>
-      </form>
-    </div>
+      </div>
+
+      <!-- Category Section -->
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select name="category" id="category" ngModel required>
+          <option value="" disabled selected>Select a category</option>
+          <option value="Women">Women</option>
+          <option value="Men">Men</option>
+          <option value="Kids">Kids</option>
+          <option value="Accessories">Accessories</option>
+        </select>
+      </div>
+
+      <!-- Brand Section -->
+      <div class="form-group">
+        <label for="brand">Brand</label>
+        <input type="text" id="brand" name="brand" ngModel placeholder="Enter brand name" required />
+      </div>
+
+      <!-- Condition Section -->
+      <div class="form-group">
+        <label for="Condition">Condition</label>
+        <select name="Condition" id="Condition" ngModel required>
+          <option value="" disabled selected>Select a condition:</option>
+          <option value="new-with-tags">New with tags</option>
+          <option value="new-without tags">New without tags</option>
+          <option value="very-good">Very good</option>
+          <option value="good">Goof</option>
+          <option value="satisfactory">Satisfactory</option>
+        </select>
+      </div>
+
+      <!-- Size Section -->
+      <div class="form-group">
+        <label for="size">Size</label>
+        <select name="size" id="size" ngModel required>
+          <option value="" disabled selected>Select a size</option>
+          <option value="XS">XS</option>
+          <option value="S">S</option>
+          <option value="M">M</option>
+          <option value="L">L</option>
+          <option value="XL">XL</option>
+        </select>
+      </div>
+
+      <!-- Price Section -->
+      <div class="form-group">
+        <label for="price">Price</label>
+        <input 
+        type="number" 
+        name="price" 
+        id="price" 
+        ngModel 
+        required 
+        placeholder="€0.00" />
+      </div>
+
+      <!-- Buttons -->
+      <div class="button-group">
+        <button type="button" class="btn draft">Save draft</button>
+        <button type="submit" class="btn upload" [disabled]="form.invalid">Upload</button>
+      </div>
+    </form>
   </div>
-  
+</div>
+
 
 
 <!-- homepage 
@@ -154,5 +181,3 @@
       </form>
     </div>
   </div>-->
-  
-
