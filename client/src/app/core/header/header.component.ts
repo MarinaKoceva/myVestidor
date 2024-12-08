@@ -16,8 +16,10 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
-  get firstName(): string {
-    return this.userService.user?.email || '';//Обнових на email, защото в момента сървъра не запазва потребителско име
+  get username(): string {
+    console.log(this.userService.user?.username);
+    
+    return this.userService.user?.username || '';
   }
 
 

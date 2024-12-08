@@ -6,10 +6,10 @@ import { createErrorMsg } from "../utils/errorUtil.js";
 const router = Router();
 
 router.post('/register', async (req, res) => {
-    const { email, password } = req.body;
+    const { username, email, password } = req.body;
 
     try {
-        const accessToken = await authService.register(email, password);
+        const accessToken = await authService.register(username, email, password);
 
         res.json(accessToken);
     } catch (error) {

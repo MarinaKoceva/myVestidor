@@ -9,18 +9,52 @@ import { emailValidator } from '../../utils/email.validator';
 import { DOMAINS } from '../../constants';
 import { ProfileDetails } from '../../types/user';
 import { CommonModule } from '@angular/common';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'], // Поправихме на styleUrls
+  styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
   isEditMode: boolean = false;
 
+  form = new FormGroup({
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(5),
+    ]),
+    email: new FormControl('', [Validators.required, emailValidator(DOMAINS)])
+    
+  });
+
+  constructor(private userService: UserService, private router: Router) {}
+  
   // Потребителски данни
+  
+  updateProfile() {
+    
+    const {
+      username,
+      email,
+    } = this.form.value;
+
+    this.userService
+      .updateProfile(username!, email!, this.userService.user?._id!)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Error with registration:', err);
+          alert('Registration failed.');
+        },
+      })
+  }  
+  
   profileDetails: ProfileDetails = {
     username: 'JohnDoe',
     email: 'johndoe123@gmail.com',
@@ -51,7 +85,7 @@ export class ProfileComponent {
   ];
   
   // Форма за редакция
-  form = new FormGroup({
+  /*form = new FormGroup({
     username: new FormControl(this.profileDetails.username, [
       Validators.required,
       Validators.minLength(5),
@@ -61,7 +95,7 @@ export class ProfileComponent {
       Validators.email,
     ]),
     tel: new FormControl(this.profileDetails.tel),
-  });
+  });*/
 
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
@@ -69,7 +103,6 @@ export class ProfileComponent {
       this.form.setValue({
         username: this.profileDetails.username,
         email: this.profileDetails.email,
-        tel: this.profileDetails.tel,
       });
     }
   }

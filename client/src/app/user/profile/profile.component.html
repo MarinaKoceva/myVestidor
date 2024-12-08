@@ -21,14 +21,10 @@
           <p>Email:</p>
           <p>{{ profileDetails.email }}</p>
         </div>
-        <div class="flex">
-          <p>Phone:</p>
-          <p>{{ profileDetails.tel }}</p>
-        </div>
       </ng-container>
 
       <ng-template #editMode>
-        <form [formGroup]="form" (ngSubmit)="handleSaveProfile()">
+        <form [formGroup]="form" (ngSubmit)="updateProfile()">
           <div class="flex">
             <p>Username:</p>
             <input type="text" formControlName="username" />
@@ -36,10 +32,6 @@
           <div class="flex">
             <p>Email:</p>
             <input type="email" formControlName="email" />
-          </div>
-          <div class="flex">
-            <p>Phone:</p>
-            <input type="text" formControlName="tel" />
           </div>
           <div class="btn-wrapper">
             <button class="red-button" type="button" (click)="onCancel($event)">

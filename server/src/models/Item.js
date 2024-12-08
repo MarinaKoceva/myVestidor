@@ -1,40 +1,46 @@
 import { Schema, model, Types } from 'mongoose';
 
 const itemSchema = new Schema({
-    make: {
+    title: {
         type: String,
         required: [true, 'Make is required!'],
         minLength: [4, 'Make should be at least 4 characters long!']
-    },
-    model: {
-        type: String,
-        required: [true, 'Model is required!'],
-        minLength: [4, 'Model should be at least 4 characters long!']
-    },
-    year: {
-        type: Number,
-        required: [true, 'Year is required!'],
-        min: [1950, 'Year cannot be before 1950!'],
-        max: [2050, 'Year cannot be after 2050!'],
     },
     description : {
         type: String,
         required: [true, 'Description is required!'],
         minLength: [10, 'Description should be at least 10 characters long!']
     },
-    price: {
-        type: Number,
-        required: [true, 'Price is required!'],
-        min: [0, 'Price must be a positive number!']
+    category: {
+        type: String,
+        required: [true, 'Category is required!'],
+        minLength: [3, 'Category should be at least 3 characters long!']
     },
-    img: {
+    brand: {
+        type: String,
+        required: [true, 'Brand is required!'],
+        minLength: [3, 'Brand should be at least 3 characters long!']
+    }, 
+    condition: {
+        type: String,
+        required: [true, 'Condition is required!'],
+        minLength: [3, 'Condition should be at least 3 characters long!']
+    },
+    size: {
+        type: String,
+        required: [true, 'Size is required!'],
+        minLength: [1, 'Size should be at least 1 characters long!']
+    },
+    price: {
+        type: String,
+        required: [true, 'Price is required!'],
+        min: [0, 'Price cannot be Negative number!'],
+    },
+    /*img: {
         type: String,
         required: [true, 'Image is required!'],
         validate: [/^https?:\/\//, 'Invalid image url!']
-    },
-    material: {
-        type: String
-    },
+    },*/
     _ownerId: {
         type: Types.ObjectId,
         ref: 'User'

@@ -3,6 +3,7 @@ import { UserService } from '../user/user.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { CurrentItemComponent } from '../items/current-item/current-item.component';
+import { ItemService } from '../items/item.service';
 
 @Component({
   selector: 'app-catalog',
@@ -19,7 +20,15 @@ export class CatalogComponent {
     { id: 3, name: 'Item 3', price: 20, image: './item3.png', description: 'Description of Item 3' }
   ];
 
-  constructor(private router: Router) {}
+  constructor(private itemService: ItemService ,private router: Router) {}
+  
+  ngOnInit() {
+    this.itemService.getAll().subscribe((items) => {
+      console.log(items);
+      
+      
+    });
+  }
   
   onViewItem(item: any) {
     if (!item.id) {

@@ -1,25 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ItemService {
-  private apiUrl = 'https://your-api-url.com/items';
+  private apiUrl = 'http://localhost:3000/api/item/';
 
   constructor(private http: HttpClient) {}
 
   addItem(itemData: any): Observable<any> {
-    return this.http.post(`${this.apiUrl}`, itemData);
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': localStorage.getItem('accessToken')!,
+      'Content-Type': 'application/json',
+    });
+    
+    return this.http.post(`${this.apiUrl}`, itemData, {headers: httpHeaders});
   }
+
+  getAll(): Observable<any> {
+    return this.http.get(`${this.apiUrl}`);
+  }
+
 
   getItemById(itemId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/${itemId}`);
   }
 
   updateItem(itemId: string, itemData: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${itemId}`, itemData);
+    
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': localStorage.getItem('accessToken')!,
+      'Content-Type': 'application/json',
+    });
+    
+    return this.http.put(`${this.apiUrl}/${itemId}`, itemData, {headers: httpHeaders});
   }
 }
 

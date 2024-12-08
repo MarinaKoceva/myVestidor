@@ -1,7 +1,7 @@
 import { Schema, model } from "mongoose";
 import bcrypt from 'bcrypt';
 
-import { SALT_ROUNDS } from "../config/constants.js";
+import { SALT_ROUNDS } from "../config/constans.js";
 
 const userSchema = new Schema({
     email: {
@@ -9,11 +9,16 @@ const userSchema = new Schema({
         unique: true,
         required: [true, 'Email is required!'],
         //minLength: [10, 'Email should be at least 10 characters long!']
+    }, 
+    username: {
+        type:String,
+        required: [true, 'Email is required!'],
+        minLength: [3, 'Username should be at least 3 characters long!']
     },
     password: {
         type:String,
         required: [true, 'Password is required!'],
-        //minLength: [4, 'Password should be at least 4 characters long!']
+        minLength: [4, 'Password should be at least 4 characters long!']
     }
 });
 

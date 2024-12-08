@@ -1,5 +1,5 @@
 import jwt from '../lib/jwt.js';
-import { JWT_SECRET } from '../config/constants.js';
+import { JWT_SECRET } from '../config/constans.js';
 import InvaliToken from '../models/InvalidToken.js';
 
 const authMiddleware = async (req, res, next) => {

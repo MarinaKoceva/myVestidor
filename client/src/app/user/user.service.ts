@@ -16,7 +16,7 @@ export class UserService implements OnDestroy {
   userSubscription: Subscription | null = null;
 
   get isLogged(): boolean {
-    return !!localStorage.getItem('accessToken'); // Проверява директно наличието на accessToken
+    return !!this.user;
   }
 
   constructor(private http: HttpClient) {
@@ -28,26 +28,11 @@ export class UserService implements OnDestroy {
   login(email: string, password: string) {
     return this.http
       .post<UserForAuth>(`${environment.apiUrl}/auth/login`, { email, password })
-      .pipe(
-        tap((user) => {
-          if (user.accessToken) {
-            this.user$$.next(user);
-            localStorage.setItem('accessToken', user.accessToken);
-          } else {
-            console.error('No accessToken returned from server.');
-          }
-        })
-      );
-  }
-  
-  /*login(email: string, password: string) {
-    return this.http
-      .post<UserForAuth>(`${environment.apiUrl}/auth/login`, { email, password })
       .pipe(tap((user) => {
         this.user$$.next(user)
         localStorage.setItem('accessToken', user.accessToken);
       }));
-  }*/
+  }
 
   register(
     username: string,
@@ -64,66 +49,14 @@ export class UserService implements OnDestroy {
 
     return this.http
       .post<UserForAuth>(`${environment.apiUrl}/auth/register`, payload)
-      .pipe(tap((user) => this.user$$.next(user)));
+      .pipe(tap((user) => {
+        this.user$$.next(user);
+        localStorage.setItem('accessToken', user.accessToken);
+      }));
   }
 
+
   logout() {
-    const token = localStorage.getItem('accessToken');
-    if (!token) {
-      console.warn('No access token found. Logging out locally.');
-      this.user$$.next(null);
-      localStorage.removeItem('accessToken');
-      return;
-    }
-  
-    const httpHeaders: HttpHeaders = new HttpHeaders({
-      'X-Authorization': token,
-      'Content-Type': 'application/json',
-    });
-  
-    this.http
-      .get<unknown>(`${environment.apiUrl}/auth/logout`, { headers: httpHeaders })
-      .subscribe({
-        next: () => {
-          this.user$$.next(null);
-          localStorage.removeItem('accessToken');
-        },
-        error: (err) => {
-          console.error('Error during logout:', err);
-          // Дори ако logout не успее, нулирайте локално
-          this.user$$.next(null);
-          localStorage.removeItem('accessToken');
-        },
-      });
-  }
-  
-  /*logout() {
-    const token = localStorage.getItem('accessToken'); // Вземаме токена
-    if (!token) {
-      console.warn('No access token found in localStorage'); // Логваме предупреждение
-      return; // Спираме изпълнението, ако токенът липсва
-    }
-  
-    const httpHeaders: HttpHeaders = new HttpHeaders({
-      'X-Authorization': token,
-      'Content-Type': 'application/json',
-    });
-  
-    this.http
-      .get<unknown>(`${environment.apiUrl}/auth/logout`, { headers: httpHeaders })
-      .subscribe({
-        next: () => {
-          this.user$$.next(null);
-          localStorage.removeItem('accessToken');
-        },
-        error: (err) => {
-          console.error('Error during logout:', err);
-        },
-      });
-  }*/
-  
-  
-  /*logout() {
     const httpHeaders: HttpHeaders = new HttpHeaders({
       'X-Authorization': localStorage.getItem('accessToken')!,
       'Content-Type': 'application/json',
@@ -135,20 +68,30 @@ export class UserService implements OnDestroy {
         this.user$$.next(null);
         localStorage.removeItem('accessToken');
       });
-  }*/
+  }
 
-  getProfile() {
+  getProfile(userId: String) {
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': localStorage.getItem('accessToken')!,
+      'Content-Type': 'application/json',
+    });
+    
     return this.http
-      .get<UserForAuth>('/users/profile')
+      .get<UserForAuth>(`${environment.apiUrl}/profile/${userId}`, {headers: httpHeaders})
       .pipe(tap((user) => this.user$$.next(user)));
   }
 
-  updateProfile(username: string, email: string) {//tel?: string
+  updateProfile(username: string, email: string, userId: string) {
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': localStorage.getItem('accessToken')!,
+      'Content-Type': 'application/json',
+    });
+    
     return this.http
-      .put<UserForAuth>(`/users/profile`, {
+      .put<UserForAuth>(`${environment.apiUrl}/profile/${userId}`, {
         username,
         email,//tel
-      })
+      }, {headers: httpHeaders})
       .pipe(tap((user) => this.user$$.next(user)));
   }
 

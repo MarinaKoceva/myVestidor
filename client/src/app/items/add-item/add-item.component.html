@@ -27,7 +27,7 @@
       <!-- Title Section -->
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" name="itemName" id="itemName" ngModel #inputTitle="ngModel" required
+        <input type="text" name="title" id="title" ngModel #inputTitle="ngModel" required
           placeholder="Enter item name" />
         <div *ngIf="inputTitle.touched && inputTitle.invalid">
           <p *ngIf="inputTitle.errors?.['required']" class="error">Title is required.</p>
@@ -65,7 +65,7 @@
       <!-- Condition Section -->
       <div class="form-group">
         <label for="Condition">Condition</label>
-        <select name="Condition" id="Condition" ngModel required>
+        <select name="condition" id="condition" ngModel required>
           <option value="" disabled selected>Select a condition:</option>
           <option value="new-with-tags">New with tags</option>
           <option value="new-without tags">New without tags</option>

@@ -1,5 +1,5 @@
 import { connect } from 'mongoose';
-import { LocalDB_URL } from './constants.js';
+import { LocalDB_URL } from './constans.js';
 
 export default async function mongooseInit() {
     try {
