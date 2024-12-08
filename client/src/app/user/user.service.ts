@@ -16,7 +16,7 @@ export class UserService implements OnDestroy {
   userSubscription: Subscription | null = null;
 
   get isLogged(): boolean {
-    return !!this.user;
+    return !!localStorage.getItem('accessToken'); // Проверява директно наличието на accessToken
   }
 
   constructor(private http: HttpClient) {
@@ -28,11 +28,26 @@ export class UserService implements OnDestroy {
   login(email: string, password: string) {
     return this.http
       .post<UserForAuth>(`${environment.apiUrl}/auth/login`, { email, password })
+      .pipe(
+        tap((user) => {
+          if (user.accessToken) {
+            this.user$$.next(user);
+            localStorage.setItem('accessToken', user.accessToken);
+          } else {
+            console.error('No accessToken returned from server.');
+          }
+        })
+      );
+  }
+  
+  /*login(email: string, password: string) {
+    return this.http
+      .post<UserForAuth>(`${environment.apiUrl}/auth/login`, { email, password })
       .pipe(tap((user) => {
         this.user$$.next(user)
         localStorage.setItem('accessToken', user.accessToken);
       }));
-  }
+  }*/
 
   register(
     username: string,
@@ -52,8 +67,37 @@ export class UserService implements OnDestroy {
       .pipe(tap((user) => this.user$$.next(user)));
   }
 
-
   logout() {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      console.warn('No access token found. Logging out locally.');
+      this.user$$.next(null);
+      localStorage.removeItem('accessToken');
+      return;
+    }
+  
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': token,
+      'Content-Type': 'application/json',
+    });
+  
+    this.http
+      .get<unknown>(`${environment.apiUrl}/auth/logout`, { headers: httpHeaders })
+      .subscribe({
+        next: () => {
+          this.user$$.next(null);
+          localStorage.removeItem('accessToken');
+        },
+        error: (err) => {
+          console.error('Error during logout:', err);
+          // Дори ако logout не успее, нулирайте локално
+          this.user$$.next(null);
+          localStorage.removeItem('accessToken');
+        },
+      });
+  }
+  
+  /*logout() {
     const token = localStorage.getItem('accessToken'); // Вземаме токена
     if (!token) {
       console.warn('No access token found in localStorage'); // Логваме предупреждение
@@ -76,7 +120,7 @@ export class UserService implements OnDestroy {
           console.error('Error during logout:', err);
         },
       });
-  }
+  }*/
   
   
   /*logout() {

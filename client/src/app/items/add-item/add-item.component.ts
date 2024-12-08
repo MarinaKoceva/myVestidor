@@ -1,4 +1,75 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { ItemService } from '../item.service';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-add-item',
+  standalone: true,
+  imports: [FormsModule, CommonModule],
+  templateUrl: './add-item.component.html',
+  styleUrls: ['./add-item.component.css'], // Поправено на styleUrls
+})
+export class AddItemComponent implements OnInit {
+  itemId: string | null = null;
+  isEditMode: boolean = false;
+
+  selectedFiles: File[] = [];
+  previewImages: string[] = [];
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private itemService: ItemService
+  ) {}
+
+  ngOnInit(): void {
+    // Check if itemId is present in the route
+    this.itemId = this.route.snapshot.paramMap.get('itemId');
+    this.isEditMode = !!this.itemId;
+
+    if (this.isEditMode && this.itemId) {
+      // Fetch the item data for editing
+      this.itemService.getItemById(this.itemId).subscribe((item) => {
+        console.log(item);
+        // Populate the form with existing data
+      });
+    }
+  }
+
+  onFileSelected(event: any): void {
+    const files = event.target.files;
+    if (files) {
+      this.selectedFiles = Array.from(files);
+      this.previewImages = this.selectedFiles.map((file) =>
+        URL.createObjectURL(file)
+      );
+    }
+  }
+
+  triggerFileInput(): void {
+    document.getElementById('photos')?.click();
+  }
+
+  addItem(form: NgForm): void {
+    if (this.isEditMode && this.itemId) {
+      // Update existing item
+      this.itemService.updateItem(this.itemId, form.value).subscribe(() => {
+        this.router.navigate(['/items']);
+      });
+    } else {
+      // Add new item
+      this.itemService.addItem(form.value).subscribe(() => {
+        this.router.navigate(['/items']);
+      });
+    }
+  }
+}
+
+
+
+/*import { Component } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { ApiService } from '../../api.service';
 import { CommonModule } from '@angular/common';
@@ -77,7 +148,7 @@ export class AddItemComponent {
     },
   });
   }
-}
+}*/
 
 
 /*import { Component } from '@angular/core';

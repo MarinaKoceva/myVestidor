@@ -15,29 +15,27 @@ export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
 
-  //   Start - User routing
+  // User routing
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
-  { path: 'how-it-works', component: HowItWorkComponent},
-  { path: 'catalog', component: CatalogComponent},
+  { path: 'how-it-works', component: HowItWorkComponent },
+  { path: 'catalog', component: CatalogComponent },
 
-  //   End - User routing
-
-  // Start - Item routing
-{
-  path: 'items',
-  children: [
-    { path: '', component: MainComponent },
-    {
-      path: ':itemId',
-      component: CurrentItemComponent,
-      canActivate: [AuthGuard],
-    },
-  ],
-},
-{ path: 'add-item', component: AddItemComponent, canActivate: [AuthGuard] },
-// End - Item routing
+  // Items routing
+  {
+    path: 'items',
+    children: [
+      { path: '', component: MainComponent },
+      {
+        path: ':itemId',
+        component: CurrentItemComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
+  { path: 'add-item', component: AddItemComponent, canActivate: [AuthGuard] }, // For creating items
+  { path: 'edit-item/:itemId', component: AddItemComponent, canActivate: [AuthGuard] }, // For editing items
   { path: '404', component: ErrorComponent },
   { path: '**', redirectTo: '/404' },
 ];

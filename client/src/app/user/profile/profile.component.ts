@@ -28,24 +28,25 @@ export class ProfileComponent {
   };
 
   // Данни за обявите
+  
   userAds = [
     {
       id: 1,
       title: 'Ad Title 1',
       description: 'Description for Ad 1.',
-      imageUrl: './ad1.jpg',
+      imageUrl: './item1.png',
     },
     {
       id: 2,
       title: 'Ad Title 2',
       description: 'Description for Ad 2.',
-      imageUrl: './ad2.jpg',
+      imageUrl: '/item2.png',
     },
     {
       id: 3,
       title: 'Ad Title 3',
       description: 'Description for Ad 3.',
-      imageUrl: './ad3.jpg',
+      imageUrl: './item3.png',
     },
   ];
   
