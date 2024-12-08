@@ -1,1 +1,12 @@
-<p>current-item works!</p>
+<div *ngIf="errorMessage; else itemDetails">
+    <p class="error-message">{{ errorMessage }}</p>
+    <button (click)="goBackToCatalog()">Go Back to Catalog</button>
+  </div>
+  
+  <ng-template #itemDetails>
+    <div class="item-details">
+      <h1>Item Details</h1>
+      <p>Loading details for item ID: {{ itemId }}</p>
+    </div>
+  </ng-template>
+  

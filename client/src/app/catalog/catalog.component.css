@@ -77,6 +77,23 @@
     box-sizing: border-box;
   }
   
+  .view-button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .view-button:hover {
+    background-color: #d81b60;
+  }
+  
   @media screen and (max-width: 768px) {
     .col-lg-3 {
       flex: 0 1 calc(50% - 20px); /* 2 items in a row for smaller screens */

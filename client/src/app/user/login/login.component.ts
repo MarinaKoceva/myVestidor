@@ -11,7 +11,8 @@ import { DOMAINS } from '../../constants';
   imports: [RouterLink, FormsModule, EmailDirective],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
-})
+}) 
+
 export class LoginComponent {
   domains = DOMAINS;
 
@@ -25,8 +26,14 @@ export class LoginComponent {
 
     const { email, password } = form.value;
 
-    this.userService.login(email, password).subscribe(() => {
-      this.router.navigate(['/home']);
+    this.userService.login(email, password).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.error('Грешка при логин:', err);
+        alert('Невалиден email или парола. Опитайте отново.');
+      },
     });
   }
 }

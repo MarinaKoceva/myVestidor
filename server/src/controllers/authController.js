@@ -10,13 +10,13 @@ router.post('/register', async (req, res) => {
 
     try {
         const accessToken = await authService.register(email, password);
-    
-        res.json(accessToken);  
+
+        res.json(accessToken);
     } catch (error) {
         if (error.message === "This email already registered!") {
             res.status(409).json({ message: createErrorMsg(error) });
         } else if (error.message.includes("validation")) {
-            res.status(400).json({ message: createErrorMsg(error) });   
+            res.status(400).json({ message: createErrorMsg(error) });
         } else {
             res.status(500).json({ message: createErrorMsg(error) });
         }
@@ -28,15 +28,15 @@ router.post('/login', async (req, res) => {
 
     try {
         const accessToken = await authService.login(email, password);
-    
-        res.json(accessToken);  
+
+        res.json(accessToken);
     } catch (error) {
         if (error.message === 'User does not exist!') {
             res.status(404).json({ message: createErrorMsg(error) });
         } else if (error.message === 'Password does not match!') {
-            res.status(401).json({ message: createErrorMsg(error) });   
+            res.status(401).json({ message: createErrorMsg(error) });
         } else if (error.message.includes("validation")) {
-            res.status(400).json({ message: createErrorMsg(error) });   
+            res.status(400).json({ message: createErrorMsg(error) });
         } else {
             res.status(500).json({ message: createErrorMsg(error) });
         }
@@ -45,7 +45,8 @@ router.post('/login', async (req, res) => {
 
 router.get('/logout', async (req, res) => {
     const token = req.header('X-Authorization');
-    await authService.logout(token); 
+
+    await authService.logout(token);
 
     res.status(204).end();
 });

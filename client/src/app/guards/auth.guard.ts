@@ -1,22 +1,23 @@
-import { inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivateFn,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
-import { UserService } from '../user/user.service';
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
 
-export const AuthGuard: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot
-) => {
-  const userService = inject(UserService);
-  const router = inject(Router);
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
 
-  if (userService.isLogged) {
+  canActivate(): boolean {
+    const isAuthenticated = this.isAuthenticated(); // Провери дали потребителят е логнат
+    if (!isAuthenticated) {
+      this.router.navigate(['/login']); // Пренасочва към login, ако не е логнат
+      return false;
+    }
     return true;
   }
-  router.navigate(['/home']);
-  return false;
-};
+
+  isAuthenticated(): boolean {
+    // Добави логика за проверка дали потребителят е удостоверен
+    return !!localStorage.getItem('authToken'); // Примерен механизъм
+  }
+}

@@ -1,8 +1,9 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { UserForAuth } from '../types/user';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Subscription, tap } from 'rxjs';
-
+import { environment } from '../../environments/environment.development';
+//TODO: Сървиси без login/register се нуждаят от ErrorHandling
 @Injectable({
   providedIn: 'root',
 })
@@ -26,43 +27,81 @@ export class UserService implements OnDestroy {
 
   login(email: string, password: string) {
     return this.http
-      .post<UserForAuth>('/api/login', { email, password })
-      .pipe(tap((user) => this.user$$.next(user)));
+      .post<UserForAuth>(`${environment.apiUrl}/auth/login`, { email, password })
+      .pipe(tap((user) => {
+        this.user$$.next(user)
+        localStorage.setItem('accessToken', user.accessToken);
+      }));
   }
 
   register(
     username: string,
     email: string,
-    //tel: string,
     password: string,
     rePassword: string
   ) {
+    const payload = {
+      username,
+      email,
+      password,
+      rePassword,
+    };
+
     return this.http
-      .post<UserForAuth>('/api/register', {
-        username,
-        email,
-        //tel,
-        password,
-        rePassword,
-      })
+      .post<UserForAuth>(`${environment.apiUrl}/auth/register`, payload)
       .pipe(tap((user) => this.user$$.next(user)));
   }
 
+
   logout() {
-    return this.http
-      .post('/api/logout', {})
-      .pipe(tap((user) => this.user$$.next(null)));
+    const token = localStorage.getItem('accessToken'); // Вземаме токена
+    if (!token) {
+      console.warn('No access token found in localStorage'); // Логваме предупреждение
+      return; // Спираме изпълнението, ако токенът липсва
+    }
+  
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': token,
+      'Content-Type': 'application/json',
+    });
+  
+    this.http
+      .get<unknown>(`${environment.apiUrl}/auth/logout`, { headers: httpHeaders })
+      .subscribe({
+        next: () => {
+          this.user$$.next(null);
+          localStorage.removeItem('accessToken');
+        },
+        error: (err) => {
+          console.error('Error during logout:', err);
+        },
+      });
   }
+  
+  
+  /*logout() {
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': localStorage.getItem('accessToken')!,
+      'Content-Type': 'application/json',
+    });
+
+    return this.http
+      .get<unknown>(`${environment.apiUrl}/auth/logout`, { headers: httpHeaders })
+      .subscribe(() => {
+        this.user$$.next(null);
+        localStorage.removeItem('accessToken');
+      });
+  }*/
 
   getProfile() {
     return this.http
-      .get<UserForAuth>('/api/users/profile')
+      .get<UserForAuth>('/users/profile')
       .pipe(tap((user) => this.user$$.next(user)));
   }
 
   updateProfile(username: string, email: string) {//tel?: string
     return this.http
-      .put<UserForAuth>(`/api/users/profile`, {
+      .put<UserForAuth>(`/users/profile`, {
         username,
         email,//tel
       })

@@ -18,6 +18,7 @@ import { UserService } from '../user.service';
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })
+
 export class RegisterComponent {
   form = new FormGroup({
     username: new FormControl('', [
@@ -80,9 +81,15 @@ export class RegisterComponent {
 
     this.userService
       .register(username!, email!, password!, rePassword!)
-      .subscribe(() => {
-        this.router.navigate(['/themes']);
-      });
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.error('Грешка при регистрация:', err);
+          alert('Регистрацията не бе успешна. Проверете данните си.');
+        },
+      })
   }  
 
 }

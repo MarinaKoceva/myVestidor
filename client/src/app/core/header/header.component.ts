@@ -10,15 +10,16 @@ import { UserService } from '../../user/user.service';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
+  constructor(private userService: UserService, private router: Router) {}
+  
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
   }
 
   get firstName(): string {
-    return this.userService.user?.firstName || '';
+    return this.userService.user?.email || '';//Обнових на email, защото в момента сървъра не запазва потребителско име
   }
 
-  constructor(private userService: UserService, private router: Router) {}
 
   logout() {
     this.userService.logout();

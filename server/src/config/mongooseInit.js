@@ -8,6 +8,6 @@ export default async function mongooseInit() {
         console.log('Successfully connect to DB!');  
     } catch (error) {
         console.log("Failed to connect to DB!");
-        console.log(error.message);
+        process.exit(1);//Промених го директно да спира съвръра ако не може да се свърже с базата данни
     };
 };
