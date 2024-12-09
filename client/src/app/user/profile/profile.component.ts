@@ -34,8 +34,24 @@ export class ProfileComponent {
   constructor(private userService: UserService, private router: Router) {}
   
   // Потребителски данни
-  
   updateProfile() {
+    const { username, email } = this.form.value;
+  
+    this.userService.updateProfile(username!, email!, this.userService.user?._id!).subscribe({
+      next: () => {
+        alert('Profile updated successfully!');
+        this.isEditMode = false; // Излизаме от режим на редактиране
+        this.router.navigate(['/profile']); // Пренасочваме към профила
+      },
+      error: (err) => {
+        console.error('Error updating profile:', err);
+        alert('Failed to update profile. Please try again.');
+      },
+    });
+  }
+  
+
+  /*updateProfile() {
     
     const {
       username,
@@ -53,13 +69,36 @@ export class ProfileComponent {
           alert('Registration failed.');
         },
       })
-  }  
+  }  */
   
   profileDetails: ProfileDetails = {
-    username: 'JohnDoe',
-    email: 'johndoe123@gmail.com',
-    tel: '123-123-213',
+    _id: '',
+    username: '',
+    email: '',
   };
+
+  ngOnInit(): void {
+    this.loadUserProfile();
+  }
+  
+  loadUserProfile(): void {
+    const userId = this.userService.user?._id;
+  
+    if (!userId) {
+      console.error('No user logged in!');
+      return;
+    }
+  
+    this.userService.getProfile(userId).subscribe({
+      next: (profile) => {
+        this.profileDetails = profile;
+        console.log('User profile loaded:', profile);
+      },
+      error: (err) => {
+        console.error('Failed to load user profile:', err);
+      },
+    });
+  }
 
   // Данни за обявите
   

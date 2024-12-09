@@ -1,5 +1,4 @@
 <div class="profile-container">
-  <!-- Горна част: Профилна снимка, име и бутон за редакция -->
   <div class="profile-header">
     <img class="profile-img" src="./profile.png" alt="User Profile Image" />
     <div class="profile-info">
@@ -9,7 +8,6 @@
   </div>
 
   <div class="profile-content">
-    <!-- Profile Details -->
     <div class="profile-details">
       <h3>Profile Details:</h3>
       <ng-container *ngIf="!isEditMode; else editMode">
@@ -45,7 +43,6 @@
       </ng-template>
     </div>
 
-    <!-- User Ads Section -->
     <div class="profile-ads">
       <h3>Your Listings:</h3>
       <div class="ads-list">
@@ -62,5 +59,3 @@
         </ng-container>
       </div>
     </div>
-  </div>
-</div>

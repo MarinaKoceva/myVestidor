@@ -1,8 +1,8 @@
 export interface User {
-  themes: string[];
-  posts: string[];
+  //themes: string[];
+  //posts: string[];
   _id: string;
-  tel: string;
+  //tel: string;
   email: string;
   username: string;
   password: string;
@@ -14,14 +14,14 @@ export interface User {
 export interface UserForAuth {
   username: string;
   email: string;
-  phoneNumber: string;
+  //phoneNumber: string;
   password: string;
   _id: string;
   accessToken: string;
 }
 
 export interface ProfileDetails {
+  _id: string;
   username: string;
   email: string;
-  tel: string;
 }

@@ -56,6 +56,15 @@
   }
   
   /* Photo upload section */
+  .preview-image {
+    width: 100px; /* Максимална ширина */
+    height: 100px; /* Максимална височина */
+    object-fit: cover; /* За правилно съотношение */
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
   .photo-upload {
     margin-bottom: 20px;
   }
@@ -72,6 +81,15 @@
     padding: 20px;
     text-align: center;
     color: #777;
+  }
+
+  .preview-image {
+    width: 100px; /* Максимална ширина */
+    height: 100px; /* Максимална височина */
+    object-fit: cover; /* За правилно съотношение */
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
   
   .upload-button {

@@ -28,6 +28,11 @@ export class ItemService {
     return this.http.get(`${this.apiUrl}/${itemId}`);
   }
 
+  getItems(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl); // Връща списък с артикули
+  }
+
+
   updateItem(itemId: string, itemData: any): Observable<any> {
     
     const httpHeaders: HttpHeaders = new HttpHeaders({
