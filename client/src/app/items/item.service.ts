@@ -28,9 +28,13 @@ export class ItemService {
     return this.http.get(`${this.apiUrl}/${itemId}`);
   }
 
-  getItems(): Observable<any[]> {
+  getItems(category: string | null): Observable<any[]> {
+    const url = category ? `${this.apiUrl}?category=${category}` : this.apiUrl;
+    return this.http.get<any[]>(url);
+  }  
+  /*getItems(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl); // Връща списък с артикули
-  }
+  }*/
 
 
   updateItem(itemId: string, itemData: any): Observable<any> {
