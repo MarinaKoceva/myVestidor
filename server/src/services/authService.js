@@ -2,23 +2,27 @@ import bcrypt from 'bcrypt';
 import jwt from '../lib/jwt.js';
 import User from "../models/User.js";
 import InvalidToken from '../models/InvalidToken.js';
-import { JWT_SECRET } from '../config/constans.js';
+import { JWT_SECRET, SALT_ROUNDS } from '../config/constans.js';
 
 
 const register = async (username, email, password) => {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("items").exec();
 
     if (user) {
         throw new Error("This email already registered!");
     }
 
-    const createdUser = await User.create({ username, email, password });
+    const hash =  await bcrypt.hash(password, SALT_ROUNDS);
+    
+    const createdUser = await User.create({ username, email, password: hash });
 
-    return createAccessToken(createdUser);
+    const items = user.items;
+
+    return createAccessToken(createdUser, items);
 }
 
 const login = async (email, password) => {
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate("items").exec();;
 
     if (!user) {
         throw new Error('User does not exist!');
@@ -30,7 +34,9 @@ const login = async (email, password) => {
         throw new Error('Password does not match!');
     };
 
-    return createAccessToken(user);
+const items = user.items;
+
+    return createAccessToken(user, items);
 };
 
 const logout = async (token) => {
@@ -41,7 +47,7 @@ const logout = async (token) => {
     }
 };
 
-async function createAccessToken(user) {
+async function createAccessToken(user, items) {
     const payload = {
         _id: user._id,
         email: user.email,
@@ -54,6 +60,7 @@ async function createAccessToken(user) {
         email: user.email,
         username: user.username,
         accessToken: token,
+        items
     };
 };
 

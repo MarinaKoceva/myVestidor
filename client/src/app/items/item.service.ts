@@ -16,7 +16,7 @@ export class ItemService {
       'Content-Type': 'application/json',
     });
     
-    return this.http.post(`${this.apiUrl}`, itemData, {headers: httpHeaders});
+    return this.http.post(`${this.apiUrl}`, {...itemData, price: Number(itemData.price)}, {headers: httpHeaders});
   }
 
   getAll(): Observable<any> {

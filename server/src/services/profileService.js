@@ -10,3 +10,11 @@ export async function updateProfile(email, username, userId) {
     return user;
 }
 
+export async function addItem(itemId, userId) {
+    const user = await User.findById(userId); 
+
+    user.items.push(itemId); 
+
+    await user.save();
+}
+

@@ -1,9 +1,11 @@
+import { Item } from "./item";
+
+
+
 export interface User {
-  //themes: string[];
-  //posts: string[];
   _id: string;
-  //tel: string;
   email: string;
+  items: Item[];
   username: string;
   password: string;
   created_at: string;
@@ -14,7 +16,7 @@ export interface User {
 export interface UserForAuth {
   username: string;
   email: string;
-  //phoneNumber: string;
+  items: Item[];
   password: string;
   _id: string;
   accessToken: string;

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Item } from '../../types/item';
 import {
   FormControl,
   FormGroup,
@@ -21,6 +22,7 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent {
   isEditMode: boolean = false;
+  items: Item[] =[];
 
   form = new FormGroup({
     username: new FormControl('', [
@@ -28,15 +30,15 @@ export class ProfileComponent {
       Validators.minLength(5),
     ]),
     email: new FormControl('', [Validators.required, emailValidator(DOMAINS)])
-    
+
   });
 
-  constructor(private userService: UserService, private router: Router) {}
-  
+  constructor(private userService: UserService, private router: Router) { }
+
   // Потребителски данни
   updateProfile() {
     const { username, email } = this.form.value;
-  
+
     this.userService.updateProfile(username!, email!, this.userService.user?._id!).subscribe({
       next: () => {
         alert('Profile updated successfully!');
@@ -49,7 +51,7 @@ export class ProfileComponent {
       },
     });
   }
-  
+
 
   /*updateProfile() {
     
@@ -70,7 +72,7 @@ export class ProfileComponent {
         },
       })
   }  */
-  
+
   profileDetails: ProfileDetails = {
     _id: '',
     username: '',
@@ -79,16 +81,17 @@ export class ProfileComponent {
 
   ngOnInit(): void {
     this.loadUserProfile();
+    this.items = this.userService.user?.items!;
   }
-  
+
   loadUserProfile(): void {
     const userId = this.userService.user?._id;
-  
+
     if (!userId) {
       console.error('No user logged in!');
       return;
     }
-  
+
     this.userService.getProfile(userId).subscribe({
       next: (profile) => {
         this.profileDetails = profile;
@@ -100,29 +103,32 @@ export class ProfileComponent {
     });
   }
 
+  // get items : any[] () {
+  //   return this.userService?.user.items;
+  // }
   // Данни за обявите
-  
-  userAds = [
-    {
-      id: 1,
-      title: 'Ad Title 1',
-      description: 'Description for Ad 1.',
-      imageUrl: './item1.png',
-    },
-    {
-      id: 2,
-      title: 'Ad Title 2',
-      description: 'Description for Ad 2.',
-      imageUrl: '/item2.png',
-    },
-    {
-      id: 3,
-      title: 'Ad Title 3',
-      description: 'Description for Ad 3.',
-      imageUrl: './item3.png',
-    },
-  ];
-  
+
+  // userAds = [
+  //   {
+  //     id: 1,
+  //     title: 'Ad Title 1',
+  //     description: 'Description for Ad 1.',
+  //     imageUrl: './item1.png',
+  //   },
+  //   {
+  //     id: 2,
+  //     title: 'Ad Title 2',
+  //     description: 'Description for Ad 2.',
+  //     imageUrl: '/item2.png',
+  //   },
+  //   {
+  //     id: 3,
+  //     title: 'Ad Title 3',
+  //     description: 'Description for Ad 3.',
+  //     imageUrl: './item3.png',
+  //   },
+  // ];
+
   // Форма за редакция
   /*form = new FormGroup({
     username: new FormControl(this.profileDetails.username, [
@@ -164,8 +170,8 @@ export class ProfileComponent {
     console.log('Editing ad:', ad);
   }
 
-  deleteAd(ad: any) {
-    console.log('Deleting ad:', ad);
-    this.userAds = this.userAds.filter((item) => item.id !== ad.id);
-  }
+  // deleteAd(ad: any) {
+  //   console.log('Deleting ad:', ad);
+  //   this.userAds = this.userAds.filter((item) => item.id !== ad.id);
+  // }
 }

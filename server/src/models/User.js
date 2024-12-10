@@ -19,14 +19,15 @@ const userSchema = new Schema({
         type:String,
         required: [true, 'Password is required!'],
         minLength: [4, 'Password should be at least 4 characters long!']
-    }
+    }, 
+    items:[{type: Schema.Types.ObjectId, ref: 'Item'}]
 });
 
-userSchema.pre('save', async function () {
+/*userSchema.pre('save', async function () {
     const hash =  await bcrypt.hash(this.password, SALT_ROUNDS);
 
     this.password = hash;
-});
+});*/
 
 const User = model('User', userSchema);
 

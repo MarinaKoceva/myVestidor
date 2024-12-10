@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { UserForAuth } from '../types/user';
+import { ProfileDetails, UserForAuth } from '../types/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Subscription, tap } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription, tap } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 //TODO: Сървиси без login/register се нуждаят от ErrorHandling
 @Injectable({
@@ -29,7 +29,9 @@ export class UserService implements OnDestroy {
     return this.http
       .post<UserForAuth>(`${environment.apiUrl}/auth/login`, { email, password })
       .pipe(tap((user) => {
-        this.user$$.next(user)
+        this.user$$.next(user);
+        console.log(user.items);
+        
         localStorage.setItem('accessToken', user.accessToken);
       }));
   }
@@ -95,49 +97,12 @@ export class UserService implements OnDestroy {
       .pipe(tap((user) => this.user$$.next(user)));
   }
 
+  getUserDetails(userId: string): Observable<ProfileDetails> {
+    const url = `${environment.apiUrl}/users/${userId}`;
+    return this.http.get<ProfileDetails>(url);
+  }
+
   ngOnDestroy(): void {
     this.userSubscription?.unsubscribe();
   }
 }
-
-
-/*import { Injectable } from '@angular/core';
-import { UserForAuth } from '../types/user';
-
-@Injectable({
-  providedIn: 'root',
-})
-export class UserService {
-  USER_KEY = '[user]';
-  user: UserForAuth | null = null;
-
-  get isLogged(): boolean {
-    return !!this.user;
-  }
-
-  constructor() {
-    try {
-      const lsUser = localStorage.getItem(this.USER_KEY) || '';
-      this.user = JSON.parse(lsUser);
-    } catch (error) {
-      this.user = null;
-    }
-  }
-
-  login() {
-    this.user = {
-      firstName: 'John',
-      email: 'john.doe@abv.bg',
-      phoneNumber: '123-123-213',
-      password: '123123',
-      id: 'asdasdsadsadsa',
-    };
-
-    localStorage.setItem(this.USER_KEY, JSON.stringify(this.user));
-  }
-
-  logout() {
-    this.user = null;
-    localStorage.removeItem(this.USER_KEY);
-  }
-}*/

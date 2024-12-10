@@ -1,6 +1,7 @@
 import querystring from 'querystring';
-
 import Item from "../models/Item.js";
+import { addItem } from './profileService.js';
+
 
 const getAll = (query = {}) => {
     let items = Item.find();
@@ -12,7 +13,12 @@ const getAll = (query = {}) => {
     return items;
 };
 
-const create = (data, userId) => Item.create({ ...data, _ownerId: userId});
+const create = async (data, userId) => {
+    const item = await Item.create({ ...data, _ownerId: userId })
+    await addItem(item._id, userId);
+
+    return item;
+};
 
 const getById = (itemId) => Item.findById(itemId);
 

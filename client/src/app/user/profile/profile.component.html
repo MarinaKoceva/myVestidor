@@ -46,14 +46,14 @@
     <div class="profile-ads">
       <h3>Your Listings:</h3>
       <div class="ads-list">
-        <ng-container *ngFor="let ad of userAds">
+        <ng-container *ngFor="let item of items">
           <div class="ad-card">
-            <img [src]="ad.imageUrl" alt="{{ ad.title }}" />
-            <h4>{{ ad.title }}</h4>
-            <p>{{ ad.description }}</p>
+            <img [src]="item.img" alt="{{ item.title }}" />
+            <h4>{{ item.title }}</h4>
+            <p>{{ item.description }}</p>
             <div class="ad-actions">
-              <button (click)="editAd(ad)">Edit</button>
-              <button (click)="deleteAd(ad)">Delete</button>
+              <button >Edit</button>
+              <button >Delete</button>
             </div>
           </div>
         </ng-container>

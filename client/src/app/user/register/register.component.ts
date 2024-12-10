@@ -86,8 +86,8 @@ export class RegisterComponent {
           this.router.navigate(['/']);
         },
         error: (err) => {
-          console.error('Грешка при регистрация:', err);
-          alert('Регистрацията не бе успешна. Проверете данните си.');
+          console.error('Login error:', err);
+          alert('Failed to login. Please check your credentials.');
         },
       })
   }  

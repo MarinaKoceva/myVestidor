@@ -32,15 +32,15 @@ const itemSchema = new Schema({
         minLength: [1, 'Size should be at least 1 characters long!']
     },
     price: {
-        type: String,
+        type: Number,
         required: [true, 'Price is required!'],
         min: [0, 'Price cannot be Negative number!'],
     },
-    /*img: {
+    img: {
         type: String,
         required: [true, 'Image is required!'],
         validate: [/^https?:\/\//, 'Invalid image url!']
-    },*/
+    },
     _ownerId: {
         type: Types.ObjectId,
         ref: 'User'

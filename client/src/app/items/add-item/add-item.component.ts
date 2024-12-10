@@ -53,18 +53,59 @@ export class AddItemComponent implements OnInit {
   }
 
   addItem(form: NgForm): void {
-    if (this.isEditMode && this.itemId) {
+    if (form.invalid) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+  
+    const newItem = {
+      title: form.value.title,
+      description: form.value.description,
+      category: form.value.category,
+      brand: form.value.brand,
+      condition: form.value.Condition, // Трябва да съвпада с името на полето във формата
+      size: form.value.size,
+      price: form.value.price,
+      img: form.value.img, // URL на изображението
+    };
+  
+    console.log('Item to upload:', newItem); // Дали данните са коректни
+  
+
+    /*const newItem = {
+      ...form.value,
+      img: form.value.img || '', // Вземете URL-а за изображението от формата
+    };*/
+  
+    this.itemService.addItem(newItem).subscribe({
+      next: () => {
+        alert('Item uploaded successfully!');
+        form.resetForm();
+        this.router.navigate(['/catalog']);
+      },
+      error: (err) => {
+        console.error('Error uploading item:', err);
+        alert('Failed to upload item.');
+      },
+    });
+
+
+
+    /*if (this.isEditMode && this.itemId) {
       // Update existing item
-      this.itemService.updateItem(this.itemId, form.value).subscribe(() => {
-        this.router.navigate(['/items']);
+      this.itemService.updateItem(this.itemId, newItem).subscribe(() => {
+        this.router.navigate(['/catalog']);
       });
     } else {
       // Add new item
-      this.itemService.addItem(form.value).subscribe(() => {
-        this.router.navigate(['/items']);
+      this.itemService.addItem(newItem).subscribe(() => {
+        this.router.navigate(['/catalog']);
       });
-    }
+    }*/
+
+      
   }
+  
 }
 
 
