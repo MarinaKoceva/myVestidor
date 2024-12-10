@@ -1,11 +1,10 @@
 import querystring from 'querystring';
 import Item from "../models/Item.js";
-import { addItem } from './profileService.js';
-
+import { addItem, removeItem } from "./profileService.js";
 
 const getAll = (query = {}) => {
     let items = Item.find();
-    
+
     if (query.where) {
         items.find(querystring.parse(query.where.replaceAll('"', '')));
     };
@@ -22,9 +21,12 @@ const create = async (data, userId) => {
 
 const getById = (itemId) => Item.findById(itemId);
 
-const remove = (itemId) => Item.findByIdAndDelete(itemId);
+const remove = async (itemId, userId) => {
+    await Item.findByIdAndDelete(itemId);
+    await removeItem(itemId, userId);
+};
 
-const edit = (itemId, data) => Item.findByIdAndUpdate(itemId, data, { runValidators: true });
+const edit = (itemId, data) => Item.findByIdAndUpdate(itemId, data, { runValidators: true, returnDocument: 'after' });
 
 export default {
     getAll,

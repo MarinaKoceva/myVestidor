@@ -1,4 +1,12 @@
 <div class="shop-section">
+  <div class="categoryBtns">
+    <a routerLink="/catalog">All</a>
+    <a routerLink="/catalog" [queryParams]="{category: 'Women'}">Women</a>
+    <a routerLink="/catalog" [queryParams]="{category: 'Men'}">Men</a>
+    <a routerLink="/catalog" [queryParams]="{category: 'Kids'}">Kids</a>
+    <a routerLink="/catalog" [queryParams]="{category: 'Accessories'}">Accessories</a>
+  </div>
+
   <div class="row">
     <div class="col-lg-3" *ngFor="let item of catalogItems">
       <div class="box">
@@ -21,4 +29,3 @@
     </div>
   </div>
 </div>
-

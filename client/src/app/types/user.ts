@@ -1,9 +1,10 @@
 import { Item } from "./item";
 
-
-
 export interface User {
+  //themes: string[];
+  //posts: string[];
   _id: string;
+  //tel: string;
   email: string;
   items: Item[];
   username: string;
@@ -26,4 +27,5 @@ export interface ProfileDetails {
   _id: string;
   username: string;
   email: string;
+  items: Item[];
 }

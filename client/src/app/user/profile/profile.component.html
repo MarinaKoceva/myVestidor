@@ -46,7 +46,7 @@
     <div class="profile-ads">
       <h3>Your Listings:</h3>
       <div class="ads-list">
-        <ng-container *ngFor="let item of items">
+        <ng-container *ngFor="let item of profileDetails.items">
           <div class="ad-card">
             <img [src]="item.img" alt="{{ item.title }}" />
             <h4>{{ item.title }}</h4>
@@ -59,3 +59,4 @@
         </ng-container>
       </div>
     </div>
+

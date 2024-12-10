@@ -10,7 +10,7 @@ router.get('/:userId', async (req, res) => {
     try {
         const user = await getProfile(userId);
 
-        res.json({ _id: user._id, email: user.email, username: user.username });
+        res.json({ _id: user._id, email: user.email, username: user.username, items: user.items });
     } catch (error) {
         res.status(404).json({ message: createErrorMsg(error) });
     }

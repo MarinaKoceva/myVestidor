@@ -50,9 +50,10 @@ router.get('/:itemId', async (req, res) => {
 
 router.delete('/:itemId', async (req, res) => {
     const itemId = req.params.itemId;
+    const userId = req.user._id;
 
     try {
-        await itemService.remove(itemId);
+        await itemService.remove(itemId, userId);
 
         res.status(204).end();
     } catch (error) {

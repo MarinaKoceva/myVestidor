@@ -22,7 +22,6 @@ import { Router } from '@angular/router';
 })
 export class ProfileComponent {
   isEditMode: boolean = false;
-  items: Item[] =[];
 
   form = new FormGroup({
     username: new FormControl('', [
@@ -77,11 +76,11 @@ export class ProfileComponent {
     _id: '',
     username: '',
     email: '',
+    items: []
   };
 
   ngOnInit(): void {
     this.loadUserProfile();
-    this.items = this.userService.user?.items!;
   }
 
   loadUserProfile(): void {

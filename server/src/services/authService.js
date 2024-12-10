@@ -5,24 +5,23 @@ import InvalidToken from '../models/InvalidToken.js';
 import { JWT_SECRET, SALT_ROUNDS } from '../config/constans.js';
 
 
+
 const register = async (username, email, password) => {
-    const user = await User.findOne({ email }).populate("items").exec();
+    const user = await User.findOne({ email });
 
     if (user) {
         throw new Error("This email already registered!");
     }
 
-    const hash =  await bcrypt.hash(password, SALT_ROUNDS);
+    const hash = await bcrypt.hash(password, SALT_ROUNDS);
     
     const createdUser = await User.create({ username, email, password: hash });
 
-    const items = user.items;
-
-    return createAccessToken(createdUser, items);
+    return createAccessToken(createdUser);
 }
 
 const login = async (email, password) => {
-    const user = await User.findOne({ email }).populate("items").exec();;
+    const user = await User.findOne({ email });
 
     if (!user) {
         throw new Error('User does not exist!');
@@ -34,33 +33,32 @@ const login = async (email, password) => {
         throw new Error('Password does not match!');
     };
 
-const items = user.items;
+    const items = user.items;
 
     return createAccessToken(user, items);
 };
 
 const logout = async (token) => {
     try {
-        await InvalidToken.create({ token }); 
+        await InvalidToken.create({ token });
     } catch (error) {
         throw new Error('Action failed!');
     }
 };
 
-async function createAccessToken(user, items) {
+async function createAccessToken(user) {
     const payload = {
         _id: user._id,
         email: user.email,
     };
 
-    const token = await jwt.sign(payload, JWT_SECRET, { expiresIn: '2h'});
+    const token = await jwt.sign(payload, JWT_SECRET, { expiresIn: '2h' });
 
     return {
         _id: user._id,
         email: user.email,
         username: user.username,
         accessToken: token,
-        items
     };
 };
 
