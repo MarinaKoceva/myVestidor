@@ -24,7 +24,8 @@
             <span>{{ item.price | currency:'EUR' }}</span>
           </h6>
         </div>
-        <button class="view-button" (click)="onViewItem(item)">View Details</button>
+        <button class="view-button" [routerLink]="['/items', item.id]">View Details</button>
+        <!--<button class="view-button" (click)="onViewItem(item)">View Details</button>-->
       </div>
     </div>
   </div>

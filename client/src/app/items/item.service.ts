@@ -46,8 +46,11 @@ export class ItemService {
     
     return this.http.put(`${this.apiUrl}/${itemId}`, itemData, {headers: httpHeaders});
   }
-}
 
+  deleteItem(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+}
+}
 
 /*import { Injectable } from '@angular/core';
 

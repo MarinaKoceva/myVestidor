@@ -1,12 +1,44 @@
-<div *ngIf="errorMessage; else itemDetails">
-    <p class="error-message">{{ errorMessage }}</p>
-    <button (click)="goBackToCatalog()">Go Back to Catalog</button>
+<div class="current-item-container">
+  <!-- Image Section -->
+  <div class="image-section">
+    <img [src]="item.img || './slider-img.png'" alt="{{ item.title }}" />
   </div>
-  
-  <ng-template #itemDetails>
-    <div class="item-details">
-      <h1>Item Details</h1>
-      <p>Loading details for item ID: {{ itemId }}</p>
+
+  <!-- Details Section -->
+  <div class="details-section">
+    <div class="detail-box">
+      <h6>Title:
+        <span>{{ item.title }}</span>
+      </h6>
+      <h6>Price:
+        <span>{{ item.price | currency:'EUR' }}</span>
+      </h6>
     </div>
-  </ng-template>
+    <!-- Buy Now Button -->
+
+    <button class="view-button" [routerLink]="['/catalog']">Buy Now</button>
+
+    <h6>Category:
+      <span>{{ item.category }}</span>
+    </h6>
+    <h6>Brand:
+      <span>{{ item.brand }}</span>
+    </h6>
+    <h6>Condition:
+      <span>{{ item.condition }}</span>
+    </h6>
+    <h6>Size:
+      <span>{{ item.size }}</span>
+    </h6>
+
+    <h6>Description:
+      <span>{{ item.description }}</span>
+    </h6>
+
+    <!-- Owner Buttons -->
+    <div *ngIf="isLoggedIn && isOwner" class="owner-buttons">
+      <button (click)="editItem()" class="edit-button">Edit</button>
+      <button (click)="deleteItem()" class="delete-button">Delete</button>
+    </div>
   
+</div>

@@ -8,7 +8,6 @@
   flex-direction: column;
 }
 
-/*New*/
 .categoryBtns {
   display: flex;
   justify-content: center;
@@ -20,7 +19,7 @@
 .categoryBtns a {
   padding: 0.2em;
   color: white;
-  background-color: #d81b60;
+  background-color: #84cc10;
   border-radius: 0.5em;
   min-width: 160px;
   text-align: center;
@@ -28,7 +27,7 @@
   font-weight: bold;
   text-decoration: none;
 }
-/*End New*/
+
 
 .box {
   width: 200px;
@@ -71,7 +70,7 @@
 }
 
 .detail-box h6 span {
-  color: #e91e63;
+  color: #333;
   font-weight: bold;
 }
 
@@ -79,7 +78,7 @@
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #e91e63;
+  background-color: #84cc10;
   color: white;
   font-size: 12px;
   font-weight: bold;
@@ -105,7 +104,7 @@
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  background-color: #e91e63;
+  background-color: #84cc10;
   color: white;
   border: none;
   border-radius: 5px;
@@ -115,7 +114,7 @@
 }
 
 .view-button:hover {
-  background-color: #d81b60;
+  background-color: #84cc10;
 }
 
 @media screen and (max-width: 768px) {
