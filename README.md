@@ -17,13 +17,10 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 
 An application about how to sell what you no longer need or shop for unique things you will no longer find in stores.
 
-Consits of "Home" page, "Catalog" page, "How it works", "Search", "Login/Register" page (for non-logged users) and "Home" page, "Catalog" page, "Sell now", "How it works", "Search" and a "Logout" page (for logged users).
+Consits of "Home" page, "Catalog" page, "How it works",  "Login/Register" page (for non-logged users) and "Home" page, "Catalog" page, "Sell now", "How it works", "Profile" page and a "Logout" page (for logged users).
 
-On the "Home" page there are buttons "Catalog" (for logged users) and "Login" (for non-logged users) .
-On the "How it works" page it is explained how the application works. Тhere аre buttons "Catalog" (for non-logged users) and "Start selling" (for logged users) .
-On "Catalog" you can see all displayed items. If you click on one item, you can see its details.
-All users are able to see other people's posts, but only logged in users can create posts.
-If a user owns a post they can manage the item in any way they want, either edditing or deleting it.
+On the "Home" page there are buttons "Catalog" (for logged users) and "Login" (for non-logged users) . On the "How it works" page it is explained how the application works. Тhere аre buttons "Login" and "Catalog" (for non-logged users) and "Start selling"  and "Catalog" (for logged users) . On "Catalog" you can see all displayed items. If you click on one item, you can see its details. All users are able to see other people's posts, but only logged in users can create posts. 
+On "Profile" page you can edditing and save your personal data and see all your post and can correct them in any way they want or delete them.
 
 # Homepage
 
