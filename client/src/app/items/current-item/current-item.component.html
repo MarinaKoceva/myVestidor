@@ -34,11 +34,3 @@
     <h6>Description:
       <span>{{ item.description }}</span>
     </h6>
-
-    <!-- Owner Buttons -->
-    <div *ngIf="isLoggedIn && isOwner" class="owner-buttons">
-      <button (click)="editItem()" class="edit-button">Edit</button>
-      <button (click)="deleteItem()" class="delete-button">Delete</button>
-    </div>
-  
-</div>

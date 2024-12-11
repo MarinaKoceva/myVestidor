@@ -1,0 +1,136 @@
+/* Container styling */
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Title */
+h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: none;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #aaa;
+}
+
+/* Error messages */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* Photo upload section */
+.preview-image {
+  width: 100px; /* Максимална ширина */
+  height: 100px; /* Максимална височина */
+  object-fit: cover; /* За правилно съотношение */
+  border-radius: 5px;
+  margin: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.photo-upload {
+  margin-bottom: 20px;
+}
+
+.photo-upload label {
+  font-size: 14px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.photo-upload-box {
+  border: 2px dashed #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  text-align: center;
+  color: #777;
+}
+
+.preview-image {
+  width: 100px; /* Максимална ширина */
+  height: 100px; /* Максимална височина */
+  object-fit: cover; /* За правилно съотношение */
+  border-radius: 5px;
+  margin: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upload-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.upload-button:hover {
+  background-color: #0056b3;
+}
+
+/* Buttons */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  border: none;
+}
+
+.btn.draft {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.btn.upload {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn.upload:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}

@@ -52,8 +52,23 @@
   margin-top: 20px;
 }
 
+.view-button {
+  background-color: #84cc10; /* New button color */
+  color: white; /* Text color */
+  padding: 10px 20px; /* Button padding */
+  font-size: 16px; /* Font size */
+  border: none; /* Remove border */
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer; /* Change cursor on hover */
+  transition: background-color 0.3s; /* Smooth hover transition */
+}
+
+.view-button:hover {
+  background-color: #84cc10; /* Hover color */
+}
+
 .buy-now-button {
-  background-color: #f56c6c;
+  background-color: #84cc10;
   color: white;
   padding: 10px 20px;
   font-size: 16px;
@@ -64,7 +79,7 @@
 }
 
 .buy-now-button:hover {
-  background-color: #d95454;
+  background-color: #56ad05;
 }
 
 .edit-button,

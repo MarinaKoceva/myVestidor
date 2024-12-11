@@ -11,17 +11,19 @@ import { DOMAINS } from '../../constants';
 import { ProfileDetails } from '../../types/user';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../user.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ItemService } from '../../items/item.service';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
 export class ProfileComponent {
   isEditMode: boolean = false;
+  userId: string | null = null;
 
   form = new FormGroup({
     username: new FormControl('', [
@@ -32,7 +34,7 @@ export class ProfileComponent {
 
   });
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private itemService: ItemService) { }
 
   // Потребителски данни
   updateProfile() {
@@ -51,27 +53,6 @@ export class ProfileComponent {
     });
   }
 
-
-  /*updateProfile() {
-    
-    const {
-      username,
-      email,
-    } = this.form.value;
-
-    this.userService
-      .updateProfile(username!, email!, this.userService.user?._id!)
-      .subscribe({
-        next: () => {
-          this.router.navigate(['/']);
-        },
-        error: (err) => {
-          console.error('Error with registration:', err);
-          alert('Registration failed.');
-        },
-      })
-  }  */
-
   profileDetails: ProfileDetails = {
     _id: '',
     username: '',
@@ -84,14 +65,14 @@ export class ProfileComponent {
   }
 
   loadUserProfile(): void {
-    const userId = this.userService.user?._id;
+    this.userId = this.userService.user?._id!;
 
-    if (!userId) {
+    if (!this.userId) {
       console.error('No user logged in!');
       return;
     }
 
-    this.userService.getProfile(userId).subscribe({
+    this.userService.getProfile(this.userId).subscribe({
       next: (profile) => {
         this.profileDetails = profile;
         console.log('User profile loaded:', profile);
@@ -101,45 +82,6 @@ export class ProfileComponent {
       },
     });
   }
-
-  // get items : any[] () {
-  //   return this.userService?.user.items;
-  // }
-  // Данни за обявите
-
-  // userAds = [
-  //   {
-  //     id: 1,
-  //     title: 'Ad Title 1',
-  //     description: 'Description for Ad 1.',
-  //     imageUrl: './item1.png',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Ad Title 2',
-  //     description: 'Description for Ad 2.',
-  //     imageUrl: '/item2.png',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Ad Title 3',
-  //     description: 'Description for Ad 3.',
-  //     imageUrl: './item3.png',
-  //   },
-  // ];
-
-  // Форма за редакция
-  /*form = new FormGroup({
-    username: new FormControl(this.profileDetails.username, [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    email: new FormControl(this.profileDetails.email, [
-      Validators.required,
-      Validators.email,
-    ]),
-    tel: new FormControl(this.profileDetails.tel),
-  });*/
 
   toggleEditMode() {
     this.isEditMode = !this.isEditMode;
@@ -165,12 +107,15 @@ export class ProfileComponent {
     this.isEditMode = false;
   }
 
-  editAd(ad: any) {
-    console.log('Editing ad:', ad);
-  }
+  deleteItem(itemId: string) {
 
-  // deleteAd(ad: any) {
-  //   console.log('Deleting ad:', ad);
-  //   this.userAds = this.userAds.filter((item) => item.id !== ad.id);
-  // }
+    this.itemService.deleteItem(itemId).subscribe({
+      next: (response) => {
+        this.router.navigate(['catalog']);
+      },
+      error: (err) => {
+        console.error('Failed to load user profile:', err);
+      },
+    });
+  }
 }

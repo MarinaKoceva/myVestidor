@@ -10,6 +10,7 @@ import { HowItWorkComponent } from './how-it-work/how-it-work.component';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CurrentItemComponent } from './items/current-item/current-item.component';
 import { AddItemComponent } from './items/add-item/add-item.component';
+import { EditItemComponent } from './items/edit-item/edit-item.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,7 +19,7 @@ export const routes: Routes = [
   // User routing
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'how-it-works', component: HowItWorkComponent },
   { path: 'catalog', component: CatalogComponent },
 
@@ -35,7 +36,7 @@ export const routes: Routes = [
     ],
   },
   { path: 'add-item', component: AddItemComponent, canActivate: [AuthGuard] }, // For creating items
-  { path: 'edit-item/:itemId', component: AddItemComponent, canActivate: [AuthGuard] }, // For editing items
+  { path: 'edit/:itemId', component: EditItemComponent, canActivate: [AuthGuard] }, // For editing items
   { path: '404', component: ErrorComponent },
   { path: '**', redirectTo: '/404' },
 ];

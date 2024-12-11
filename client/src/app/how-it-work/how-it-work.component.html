@@ -24,10 +24,7 @@
       </div>
     </div>
   
-    <!-- Бутон за стартиране на продажба 
-    <div class="button-container">
-        <a routerLink="/sell" class="sell-btn">Start selling</a>
-    </div>-->
+    <!-- Бутон за стартиране на продажба -->
     <div class="center-container">
       <a *ngIf="isLoggedIn; else loginLink" routerLink="/add-item" class="sell-btn">Start selling</a>
       <ng-template #loginLink>

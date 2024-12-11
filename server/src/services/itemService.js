@@ -26,7 +26,22 @@ const remove = async (itemId, userId) => {
     await removeItem(itemId, userId);
 };
 
-const edit = (itemId, data) => Item.findByIdAndUpdate(itemId, data, { runValidators: true, returnDocument: 'after' });
+const edit = async (itemId, data) => {
+    const item = await Item.findById(itemId);
+    item.img = data.img;
+    item.title = data.title;
+    item.description = data.description;
+    item.category = data.category;
+    item.brand = data.brand;
+    item.condition = data.condition;
+    item.size = data.size;
+    item.price = data.price;
+
+    await item.save();
+
+    return item;
+
+};
 
 export default {
     getAll,

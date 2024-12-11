@@ -26,7 +26,6 @@ export class RegisterComponent {
       Validators.minLength(5),
     ]),
     email: new FormControl('', [Validators.required, emailValidator(DOMAINS)]),
-    //tel: new FormControl(''),
     passGroup: new FormGroup(
       {
         password: new FormControl('', [

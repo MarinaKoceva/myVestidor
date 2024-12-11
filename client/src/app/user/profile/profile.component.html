@@ -52,11 +52,10 @@
             <h4>{{ item.title }}</h4>
             <p>{{ item.description }}</p>
             <div class="ad-actions">
-              <button >Edit</button>
-              <button >Delete</button>
+              <button [routerLink]="['/edit/' + item._id]">Edit</button>
+              <button (click)="deleteItem(item._id)">Delete</button>
             </div>
           </div>
         </ng-container>
       </div>
     </div>
-

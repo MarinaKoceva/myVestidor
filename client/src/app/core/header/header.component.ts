@@ -10,18 +10,15 @@ import { UserService } from '../../user/user.service';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  constructor(private userService: UserService, private router: Router) {}
-  
+  constructor(private userService: UserService, private router: Router) { }
+
   get isLoggedIn(): boolean {
     return this.userService.isLogged;
   }
 
   get username(): string {
-    console.log(this.userService.user?.username);
-    
     return this.userService.user?.username || '';
   }
-
 
   logout() {
     this.userService.logout();

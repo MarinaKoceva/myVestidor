@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, throwError, Observable, from } from 'rxjs';
+import { Item } from '../types/item';
+import emailjs, { type EmailJSResponseStatus } from '@emailjs/browser';
+import { UserService } from '../user/user.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,88 +11,92 @@ import { Observable } from 'rxjs';
 export class ItemService {
   private apiUrl = 'http://localhost:3000/api/item/';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private userService: UserService) { }
 
   addItem(itemData: any): Observable<any> {
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      return throwError(() => new Error('Unauthorized: Access token is missing.'));
+    }
+
     const httpHeaders: HttpHeaders = new HttpHeaders({
-      'X-Authorization': localStorage.getItem('accessToken')!,
+      'X-Authorization': token,
       'Content-Type': 'application/json',
     });
-    
-    return this.http.post(`${this.apiUrl}`, {...itemData, price: Number(itemData.price)}, {headers: httpHeaders});
+
+    return this.http.post(`${this.apiUrl}`, { ...itemData, price: Number(itemData.price) }, { headers: httpHeaders });
   }
 
   getAll(): Observable<any> {
     return this.http.get(`${this.apiUrl}`);
   }
 
-
   getItemById(itemId: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}/${itemId}`);
+    return this.http.get(`${this.apiUrl}${itemId}`);
   }
 
   getItems(category: string | null): Observable<any[]> {
-    const url = category ? `${this.apiUrl}?category=${category}` : this.apiUrl;
+    const url = category ? `${this.apiUrl}?where=category%3D%22${category}%22` : this.apiUrl;
     return this.http.get<any[]>(url);
-  }  
-  /*getItems(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl); // Връща списък с артикули
-  }*/
-
+  }
 
   updateItem(itemId: string, itemData: any): Observable<any> {
-    
+    const token = localStorage.getItem('accessToken');
+    if (!token) {
+      return throwError(() => new Error('Unauthorized: Access token is missing.'));
+    }
+
     const httpHeaders: HttpHeaders = new HttpHeaders({
-      'X-Authorization': localStorage.getItem('accessToken')!,
+      'X-Authorization': token,
       'Content-Type': 'application/json',
     });
-    
-    return this.http.put(`${this.apiUrl}/${itemId}`, itemData, {headers: httpHeaders});
+
+    return this.http.put(this.apiUrl + itemId, itemData, { headers: httpHeaders }).pipe(
+      catchError((error) => {
+        console.error('Error updating item:', error.message || error);
+        return throwError(() => new Error('Failed to update the item. Please try again later.'));
+      })
+    );
   }
 
   deleteItem(id: string): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
-}
-}
+    const token = localStorage.getItem('accessToken');
+    console.log(token);
 
-/*import { Injectable } from '@angular/core';
+    if (!token) {
+      return throwError(() => new Error('Unauthorized: Access token is missing.'));
+    }
 
-@Injectable({
-  providedIn: 'root', // Гарантира, че сервизът е достъпен навсякъде в приложението
-})
-export class ItemService {
-  private items: any[] = [
-    {
-      name: 'Item 1',
-      price: 8,
-      brand: 'Brand A',
-      image: './item1.png',
-      isNew: true,
-    },
-    {
-      name: 'Item 2',
-      price: 20,
-      brand: 'Brand B',
-      image: './item2.png',
-      isNew: false,
-    },
-    {
-      name: 'Item 3',
-      price: 10,
-      brand: 'Brand C',
-      image: './item3.png',
-      isNew: true,
-    },
-  ];
+    const httpHeaders: HttpHeaders = new HttpHeaders({
+      'X-Authorization': token,
+      'Content-Type': 'application/json',
+    });
 
-  // Вземете всички елементи
-  getItems() {
-    return this.items;
+    return this.http.delete(`${this.apiUrl}${id}`, { headers: httpHeaders }).pipe(
+      catchError((error) => {
+        console.error('Error updating item:', error.message || error);
+        return throwError(() => new Error('Failed to update the item. Please try again later.'));
+      }));
   }
 
-  // Добавете нов елемент
-  addItem(item: any) {
-    this.items.push(item);
+  buyItem(itemData: Item) {
+    return emailjs.send("service_9mc6blk", "template_0xsb92g",
+      {
+        title: itemData.title,
+        price: itemData.price,
+        size: itemData.size,
+        category: itemData.category,
+        brand: itemData.brand,
+        condition: itemData.condition,
+        message: `Successful purchase of ${itemData.title}`,
+        email: this.userService.user?.email
+      },
+      { publicKey: "bem3832fkOlCTZv9b" })
+      .then((res) => {
+        if (res.status !== 200) {
+          throw new Error("Failed to send email");
+        }
+      })
+      .catch((err) => console.error(err));
   }
 }
-*/

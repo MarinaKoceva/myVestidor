@@ -92,7 +92,7 @@ export class UserService implements OnDestroy {
     return this.http
       .put<UserForAuth>(`${environment.apiUrl}/profile/${userId}`, {
         username,
-        email,//tel
+        email,
       }, {headers: httpHeaders})
       .pipe(tap((user) => this.user$$.next(user)));
   }

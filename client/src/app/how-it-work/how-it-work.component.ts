@@ -8,8 +8,9 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [RouterLink, CommonModule],
   templateUrl: './how-it-work.component.html',
-  styleUrls: ['./how-it-work.component.css'], // Поправено от styleUrl на styleUrls
+  styleUrls: ['./how-it-work.component.css'],
 })
+
 export class HowItWorkComponent {
   // Getter за проверка на логнатото състояние
   get isLoggedIn(): boolean {

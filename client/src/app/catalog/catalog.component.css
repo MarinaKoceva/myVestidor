@@ -19,12 +19,12 @@
 .categoryBtns a {
   padding: 0.2em;
   color: white;
-  background-color: #84cc10;
+  background-color: rgb(38, 126, 38);
   border-radius: 0.5em;
   min-width: 160px;
   text-align: center;
   font-size: 16pt;
-  font-weight: bold;
+  font-weight: auto;
   text-decoration: none;
 }
 

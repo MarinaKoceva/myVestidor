@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
   
 
   isAuthenticated(): boolean {
-    // Добави логика за проверка дали потребителят е удостоверен
-    return !!localStorage.getItem('authToken'); // Примерен механизъм
+    // Логика за проверка дали потребителят е удостоверен
+    return !!localStorage.getItem('authToken'); 
   }
 }

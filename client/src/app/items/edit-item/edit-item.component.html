@@ -1,0 +1,97 @@
+<div class="container">
+  <div class="sell-item-form">
+      <h2>Edit item</h2>
+
+      <form #form="ngForm" (ngSubmit)="editItem(form)">
+
+          <!-- Image URL Section -->
+          <div class="form-group">
+              <label for="imageUrl">Image URL</label>
+              <input type="url" name="img" id="imageUrl" [ngModel]="item?.img" ngModel required
+                  placeholder="Enter image URL (e.g., https://example.com/image.jpg)" />
+              <div *ngIf="form.controls['img']?.touched && form.controls['img']?.invalid">
+                  <p *ngIf="form.controls['img']?.errors?.['required']" class="error">
+                      Image URL is required.
+                  </p>
+                  <p *ngIf="form.controls['img']?.errors?.['pattern']" class="error">
+                      Invalid URL. Must start with http:// or https://.
+                  </p>
+              </div>
+          </div>
+
+          <!-- Title Section -->
+          <div class="form-group">
+              <label for="title">Title</label>
+              <input type="text" name="title" id="title" [ngModel]="item?.title" ngModel #inputTitle="ngModel" required
+                  placeholder="Enter item name" />
+              <div *ngIf="inputTitle.touched && inputTitle.invalid">
+                  <p *ngIf="inputTitle.errors?.['required']" class="error">Title is required.</p>
+              </div>
+          </div>
+
+          <!-- Description Section -->
+          <div class="form-group">
+              <label for="description">Describe your item</label>
+              <textarea name="description" id="description" rows="4" [ngModel]="item?.description" ngModel #inputDescription="ngModel" required
+                  placeholder="e.g. only worn a few times, true to size"></textarea>
+              <div *ngIf="inputDescription.touched && inputDescription.invalid">
+                  <p *ngIf="inputDescription.errors?.['required']" class="error">Description is required.</p>
+              </div>
+          </div>
+
+          <!-- Category Section -->
+          <div class="form-group">
+              <label for="category">Category</label>
+              <select name="category" id="category" ngModel required>
+                  <option value="" disabled selected>Select a category</option>
+                  <option value="Women">Women</option>
+                  <option value="Men">Men</option>
+                  <option value="Kids">Kids</option>
+                  <option value="Accessories">Accessories</option>
+              </select>
+          </div>
+
+          <!-- Brand Section -->
+          <div class="form-group">
+              <label for="brand">Brand</label>
+              <input type="text" id="brand" [ngModel]="item?.description" name="brand" ngModel placeholder="Enter brand name" required />
+          </div>
+
+          <div class="form-group">
+              <label for="condition">Condition</label>
+              <select name="condition" id="condition" ngModel required>
+                  <option value="" disabled selected>Select a condition:</option>
+                  <option value="new-with-tags">New with tags</option>
+                  <option value="new-without-tags">New without tags</option>
+                  <option value="very-good">Very good</option>
+                  <option value="good">Good</option>
+                  <option value="satisfactory">Satisfactory</option>
+              </select>
+          </div>
+
+          <!-- Size Section -->
+          <div class="form-group">
+              <label for="size">Size</label>
+              <select name="size" id="size" ngModel required>
+                  <option value="" disabled selected>Select a size</option>
+                  <option value="XS">XS</option>
+                  <option value="S">S</option>
+                  <option value="M">M</option>
+                  <option value="L">L</option>
+                  <option value="XL">XL</option>
+              </select>
+          </div>
+
+          <!-- Price Section -->
+          <div class="form-group">
+              <label for="price">Price</label>
+              <input type="number" [ngModel]="item?.price" name="price" id="price" ngModel required placeholder="€0.00" />
+          </div>
+
+          <!-- Buttons -->
+          <div class="button-group">
+              <button type="submit" class="btn upload">Upload</button>
+          </div>
+      </form>
+  </div>
+</div>

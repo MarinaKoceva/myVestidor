@@ -1,12 +1,12 @@
 export interface Item{
-    id: String,
-    title: String,
-    description: String, 
-    category: String,
-    brand: String, 
-    condition: String,
-    size: String,
+    id: string,
+    title: string,
+    description: string, 
+    category: string,
+    brand: string, 
+    condition: string,
+    size: string,
     price: Number,
-    img: String,
+    img: string,
 }
 
