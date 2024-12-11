@@ -80,7 +80,7 @@ export class ItemService {
   }
 
   buyItem(itemData: Item) {
-    return emailjs.send("service_9mc6blk", "template_0xsb92g",
+    return emailjs.send("service_e1iryaj", "template_7zrdcgh",
       {
         title: itemData.title,
         price: itemData.price,
@@ -91,7 +91,7 @@ export class ItemService {
         message: `Successful purchase of ${itemData.title}`,
         email: this.userService.user?.email
       },
-      { publicKey: "bem3832fkOlCTZv9b" })
+      { publicKey: "ikexL1szxFBMIagnU" })
       .then((res) => {
         if (res.status !== 200) {
           throw new Error("Failed to send email");

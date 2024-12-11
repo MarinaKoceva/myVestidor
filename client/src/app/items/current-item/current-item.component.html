@@ -16,7 +16,8 @@
     </div>
     <!-- Buy Now Button -->
 
-    <button class="view-button" [routerLink]="['/catalog']">Buy Now</button>
+
+    <button *ngIf="!isOwner" class="view-button" (click)="buyNow()">Buy Now</button>
 
     <h6>Category:
       <span>{{ item.category }}</span>

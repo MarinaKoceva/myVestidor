@@ -100,4 +100,9 @@ export class EditItemComponent implements OnInit {
       },
     });
   }
+
+  redirect(){
+    {this.router.navigate(['profile'])};
+ }
+
 }

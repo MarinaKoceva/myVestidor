@@ -126,7 +126,12 @@ textarea::placeholder {
 }
 
 .btn.upload {
-  background-color: #007bff;
+  background-color: #56ad05;
+  color: white;
+}
+
+#cancel {
+  background-color: #56ad05;
   color: white;
 }
 
